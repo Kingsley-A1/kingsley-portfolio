@@ -39,13 +39,13 @@ export function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="text-h5 font-bold tracking-tight text-neutral-900 dark:text-white transition-colors hover:text-brand-blue dark:hover:text-brand-blue-bright"
+          className="text-h5 font-bold tracking-tight text-neutral-900 dark:text-white transition-colors hover:text-brand-blue dark:hover:text-brand-blue-bright whitespace-nowrap truncate max-w-[200px] sm:max-w-full"
         >
           {PERSONA.name}
         </Link>
 
         {/* Desktop nav */}
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => {
             const isActive =
               link.href === "/"
@@ -84,7 +84,7 @@ export function Header() {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className="rounded-lg p-2 text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800 md:hidden"
+            className="rounded-lg p-2 text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800 lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -95,7 +95,7 @@ export function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="bg-white dark:bg-neutral-900 mx-4 mt-3 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 shadow-xl md:hidden">
+        <div className="bg-white dark:bg-neutral-900 mx-4 mt-3 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 shadow-xl lg:hidden">
           <ul className="flex flex-col gap-1">
             {NAV_LINKS.map((link) => {
               const isActive =
