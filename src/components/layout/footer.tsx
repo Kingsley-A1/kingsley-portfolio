@@ -1,18 +1,27 @@
 import Link from "next/link";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { PERSONA, SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  TwitterXIcon,
+  FacebookIcon,
+  InstagramIcon,
+  TiktokIcon,
+} from "@/components/icons/social-icons";
+import type { ComponentType, SVGProps } from "react";
 
-const SOCIAL_ICONS: Record<string, string> = {
-  github: "GH",
-  linkedin: "LI",
-  twitter: "𝕏",
-  facebook: "FB",
-  instagram: "IG",
-  tiktok: "TT",
+const SOCIAL_ICON_MAP: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+  github: GithubIcon,
+  linkedin: LinkedinIcon,
+  twitter: TwitterXIcon,
+  facebook: FacebookIcon,
+  instagram: InstagramIcon,
+  tiktok: TiktokIcon,
 };
 
 export function Footer({
-  socialLinks: dbLinks,
+  socialLinks: dbLinks = {},
 }: {
   socialLinks?: Record<string, string>;
 }) {
@@ -41,21 +50,30 @@ export function Footer({
               digital experiences with modern web technologies.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
-              {visibleSocials.map(([key, url]) => (
-                <a
-                  key={key}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-1.5 text-caption font-semibold text-neutral-500 transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-700"
-                  aria-label={key}
-                >
-                  <span className="text-[10px] font-bold">
-                    {SOCIAL_ICONS[key] ?? key.slice(0, 2).toUpperCase()}
-                  </span>
-                  <span className="hidden sm:inline">{key}</span>
-                </a>
-              ))}
+              {visibleSocials.map(([key, url]) => {
+                const IconComponent = SOCIAL_ICON_MAP[key];
+                return (
+                  <a
+                    key={key}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-2 text-neutral-500 transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-700"
+                    aria-label={key}
+                  >
+                    {IconComponent ? (
+                      <IconComponent className="h-4 w-4" />
+                    ) : (
+                      <span className="text-[10px] font-bold uppercase">
+                        {key.slice(0, 2)}
+                      </span>
+                    )}
+                    <span className="hidden text-caption font-medium sm:inline capitalize">
+                      {key}
+                    </span>
+                  </a>
+                );
+              })}
               <a
                 href={SOCIAL_LINKS.email}
                 className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-1.5 text-caption font-semibold text-neutral-500 transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-700"

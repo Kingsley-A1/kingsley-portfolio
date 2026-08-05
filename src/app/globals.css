@@ -152,6 +152,24 @@ body {
   animation: gradientShift 15s ease infinite;
 }
 
+/* ---- Hero Chrome ---- */
+.bg-hero-chrome {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgb(37 99 235 / 0.15), transparent),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgb(13 148 136 / 0.12), transparent),
+    radial-gradient(ellipse 50% 40% at 10% 70%, rgb(217 119 6 / 0.1), transparent),
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgb(244 63 94 / 0.06), transparent),
+    #fafafa;
+  background-size: 100% 100%;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgb(148 163 184 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(148 163 184 / 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
 @keyframes gradientShift {
   0%, 100% { background-position: 0% 50%; }
   25% { background-position: 100% 0%; }

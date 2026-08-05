@@ -27,8 +27,8 @@ export function Header() {
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-300",
         scrolled
-          ? "glass shadow-sm py-3"
-          : "bg-transparent py-5",
+          ? "bg-white border-b border-neutral-200 shadow-sm py-3"
+          : "bg-white py-5",
       )}
     >
       <nav
@@ -89,7 +89,7 @@ export function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="glass mx-4 mt-3 rounded-2xl p-4 shadow-xl md:hidden">
+        <div className="bg-white mx-4 mt-3 rounded-lg border border-neutral-200 p-4 shadow-xl md:hidden">
           <ul className="flex flex-col gap-1">
             {NAV_LINKS.map((link) => {
               const isActive =

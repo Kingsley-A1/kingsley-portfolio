@@ -16,10 +16,8 @@ function LoadingBarWrapper() {
 
 export function PublicShell({
   children,
-  socialLinks,
 }: {
   children: React.ReactNode;
-  socialLinks?: Record<string, string>;
 }) {
   const pathname = usePathname();
 
@@ -32,7 +30,7 @@ export function PublicShell({
       <LoadingBarWrapper />
       <Header />
       <main className="flex flex-1 flex-col">{children}</main>
-      <Footer socialLinks={socialLinks} />
+      <Footer />
     </>
   );
 }

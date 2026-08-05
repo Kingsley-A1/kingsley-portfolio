@@ -19,28 +19,39 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ──────────────────────────────────────────── */}
-      <section className="relative flex min-h-screen items-center overflow-hidden bg-animated-gradient pt-20">
+      <section className="relative flex min-h-screen items-center overflow-hidden bg-hero-chrome hero-grid pt-20">
+        {/* Chrome color blobs — vibrant but not noisy */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-40 right-0 h-[600px] w-[600px] rounded-full bg-brand-blue/10 blur-3xl animate-pulse"
+          className="pointer-events-none absolute -top-20 right-[10%] h-[500px] w-[500px] rounded-full bg-brand-blue/20 blur-[100px] animate-pulse"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-40 left-0 h-[500px] w-[500px] rounded-full bg-brand-teal/10 blur-3xl"
-          style={{ animationDelay: "1.5s" }}
+          className="pointer-events-none absolute top-[30%] -left-20 h-[400px] w-[400px] rounded-full bg-brand-teal/15 blur-[100px]"
+          style={{ animationDelay: "2s" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-20 left-[30%] h-[350px] w-[350px] rounded-full bg-brand-amber/15 blur-[100px]"
+          style={{ animationDelay: "1s" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-[10%] right-[30%] h-[250px] w-[250px] rounded-full bg-brand-coral/10 blur-[80px]"
+          style={{ animationDelay: "3s" }}
         />
 
         <div className="relative mx-auto w-full max-w-7xl px-6 py-20 sm:py-32">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue-surface px-4 py-1.5 text-caption font-semibold uppercase tracking-widest text-brand-blue-deep">
+              <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/30 bg-brand-blue-surface/80 px-4 py-1.5 text-caption font-semibold uppercase tracking-widest text-brand-blue-deep backdrop-blur-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
                 Open to opportunities
               </span>
 
               <h1 className="mt-6 text-display font-bold leading-display tracking-tight text-neutral-900">
                 Full-stack engineer building{" "}
-                <span className="text-gradient-blue">production-grade</span>{" "}
+                <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-amber bg-clip-text text-transparent">production-grade</span>{" "}
                 digital products.
               </h1>
 
@@ -95,12 +106,14 @@ export default async function HomePage() {
 
             <div className="flex justify-center lg:justify-end">
               <div className="relative">
-                <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-brand-blue/20 via-brand-teal/20 to-brand-amber/20 blur-sm" />
-                <div className="relative glass rounded-3xl p-2 shadow-xl">
-                  <div className="aspect-[3/4] w-72 overflow-hidden rounded-2xl bg-gradient-to-br from-brand-blue-surface via-brand-teal-surface to-brand-amber-surface sm:w-80">
+                {/* Chrome glow ring */}
+                <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-brand-blue/30 via-brand-teal/25 to-brand-amber/20 blur-xl animate-pulse" />
+                <div className="absolute -inset-3 rounded-[1.75rem] bg-gradient-to-br from-brand-blue/15 via-brand-coral/10 to-brand-teal/15 blur-md" />
+                <div className="relative rounded-[1.25rem] border border-white/60 bg-white/90 p-3 shadow-2xl backdrop-blur-sm">
+                  <div className="aspect-[3/4] w-72 overflow-hidden rounded-xl bg-gradient-to-br from-brand-blue-surface via-brand-teal-surface to-brand-amber-surface sm:w-80">
                     <div className="flex h-full items-center justify-center">
                       <div className="text-center p-8">
-                        <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-teal text-3xl font-bold text-white shadow-lg">
+                        <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue via-brand-teal to-brand-amber text-3xl font-bold text-white shadow-lg ring-4 ring-white">
                           {PERSONA.name.split(" ").map((n) => n[0]).join("")}
                         </div>
                         <h2 className="text-h4 font-bold text-neutral-900">
@@ -114,7 +127,7 @@ export default async function HomePage() {
                             (role) => (
                               <span
                                 key={role}
-                                className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-caption font-medium text-neutral-600"
+                                className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-caption font-medium text-neutral-600 shadow-sm"
                               >
                                 {role}
                               </span>

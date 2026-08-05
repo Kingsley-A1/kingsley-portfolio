@@ -1,7 +1,5 @@
--- Add social links to personal_about
--- Step 1: add column as nullable first (avoids CockroachDB backfill conflict)
+-- Add social links column (CockroachDB-compatible: no NOT NULL default backfill)
 ALTER TABLE personal_about ADD COLUMN IF NOT EXISTS social_links JSONB NULL;
 
--- Step 2: set default values for existing rows
 UPDATE personal_about SET social_links = '{"github":"https://github.com/kingsley-a1","linkedin":"https://linkedin.com/in/kingsley-maduabuchi","twitter":"https://twitter.com/blessedking_","facebook":"","instagram":"","tiktok":""}'::JSONB
 WHERE id = 'primary' AND social_links IS NULL;
