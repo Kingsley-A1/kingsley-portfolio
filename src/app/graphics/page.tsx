@@ -28,13 +28,13 @@ export default async function GraphicsPage() {
         gradient="warm"
       />
 
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white dark:bg-neutral-900 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mb-12">
-            <h2 className="text-h2 font-bold text-neutral-900">
+            <h2 className="text-h2 font-bold text-neutral-900 dark:text-neutral-100">
               Design <span className="text-gradient-warm">portfolio</span>
             </h2>
-            <p className="mt-2 text-body text-neutral-500 max-w-xl">
+            <p className="mt-2 text-body text-neutral-500 dark:text-neutral-400 max-w-xl">
               {graphics.length} works spanning branding, social media, print, and more.
             </p>
           </Reveal>

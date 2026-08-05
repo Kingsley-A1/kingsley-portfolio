@@ -202,7 +202,7 @@ export default async function HomePage() {
             <Reveal className="mt-10 text-center" delay={0.2}>
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 bg-white px-6 py-3 text-body font-semibold text-neutral-700 transition-all hover:border-neutral-400 hover:shadow-md"
+                className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-6 py-3 text-body font-semibold text-neutral-700 dark:text-neutral-300 transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-md"
               >
                 View all projects
                 <ArrowRight className="h-4 w-4" />
@@ -309,7 +309,7 @@ export default async function HomePage() {
             <Reveal className="mt-10 text-center" delay={0.15}>
               <Link
                 href="/collaborations"
-                className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 bg-white px-6 py-3 text-body font-semibold text-neutral-700 transition-all hover:border-neutral-400 hover:shadow-md"
+                className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-6 py-3 text-body font-semibold text-neutral-700 dark:text-neutral-300 transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-md"
               >
                 View all collaborations
                 <ArrowRight className="h-4 w-4" />

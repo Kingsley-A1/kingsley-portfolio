@@ -32,7 +32,7 @@ export default async function ProjectsPage() {
       />
 
       {/* ── Stats Bar ───────────────────────────────────── */}
-      <section className="border-b border-neutral-200 bg-white py-8">
+      <section className="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 py-8">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
             {[
@@ -42,8 +42,8 @@ export default async function ProjectsPage() {
               { value: String(new Set(projects.map((p) => p.type)).size), label: "Platform Types" },
             ].map((stat) => (
               <div key={stat.label} className="border-l-2 border-brand-blue/30 pl-4">
-                <div className="text-h4 font-bold text-neutral-900">{stat.value}</div>
-                <div className="mt-1 text-caption uppercase tracking-widest text-neutral-500">
+                <div className="text-h4 font-bold text-neutral-900 dark:text-neutral-100">{stat.value}</div>
+                <div className="mt-1 text-caption uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
                   {stat.label}
                 </div>
               </div>
@@ -53,13 +53,13 @@ export default async function ProjectsPage() {
       </section>
 
       {/* ── Projects Grid ────────────────────────────────── */}
-      <section className="bg-neutral-50 py-20 sm:py-28">
+      <section className="bg-neutral-50 dark:bg-neutral-950 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mb-12">
-            <h2 className="text-h2 font-bold text-neutral-900">
+            <h2 className="text-h2 font-bold text-neutral-900 dark:text-neutral-100">
               The <span className="text-gradient-blue">portfolio</span>
             </h2>
-            <p className="mt-2 text-body text-neutral-500 max-w-xl">
+            <p className="mt-2 text-body text-neutral-500 dark:text-neutral-400 max-w-xl">
               Filter by platform type. Projects marked &quot;Coming Soon&quot; are
               actively being developed.
             </p>

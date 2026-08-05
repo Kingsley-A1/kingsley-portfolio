@@ -64,12 +64,12 @@ export function ProjectsShowcase({
           return (
             <Reveal key={project.id} delay={i * 0.05}>
               <div
-                className="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
+                className="group relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
                 onMouseEnter={() => setHoveredId(project.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
                 {/* Image */}
-                <div className="relative aspect-video overflow-hidden bg-neutral-100">
+                <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
                   {project.imageUrl ? (
                     <img
                       src={project.imageUrl}
@@ -79,7 +79,7 @@ export function ProjectsShowcase({
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center">
-                      <TypeIcon className="h-10 w-10 text-neutral-300" />
+                      <TypeIcon className="h-10 w-10 text-neutral-300 dark:text-neutral-600" />
                     </div>
                   )}
 
@@ -122,17 +122,17 @@ export function ProjectsShowcase({
                 {/* Content */}
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-body font-semibold text-neutral-900 group-hover:text-brand-blue transition-colors">
+                    <h3 className="text-body font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-brand-blue transition-colors">
                       {project.name}
                     </h3>
-                    <span className="flex-shrink-0 rounded-md bg-neutral-100 px-2 py-0.5 text-caption font-medium uppercase text-neutral-500">
+                    <span className="flex-shrink-0 rounded-md bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 text-caption font-medium uppercase text-neutral-500 dark:text-neutral-400">
                       {project.type}
                     </span>
                   </div>
-                  <p className="mt-1 text-caption text-neutral-500">
+                  <p className="mt-1 text-caption text-neutral-500 dark:text-neutral-400">
                     {project.category}
                   </p>
-                  <p className="mt-2 text-body-sm leading-relaxed text-neutral-600 line-clamp-2">
+                  <p className="mt-2 text-body-sm leading-relaxed text-neutral-600 dark:text-neutral-400 line-clamp-2">
                     {project.description}
                   </p>
 
@@ -141,19 +141,19 @@ export function ProjectsShowcase({
                     {project.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-neutral-200 px-2.5 py-0.5 text-caption text-neutral-500"
+                        className="rounded-full border border-neutral-200 dark:border-neutral-700 px-2.5 py-0.5 text-caption text-neutral-500 dark:text-neutral-400"
                       >
                         {tag}
                       </span>
                     ))}
                     {project.tags.length > 3 && (
-                      <span className="rounded-full border border-neutral-200 px-2.5 py-0.5 text-caption text-neutral-400">
+                      <span className="rounded-full border border-neutral-200 dark:border-neutral-700 px-2.5 py-0.5 text-caption text-neutral-400 dark:text-neutral-500">
                         +{project.tags.length - 3}
                       </span>
                     )}
                   </div>
 
-                  <div className="mt-3 text-caption text-neutral-400">
+                  <div className="mt-3 text-caption text-neutral-400 dark:text-neutral-500">
                     {project.year}
                   </div>
                 </div>

@@ -11,8 +11,8 @@ export function GraphicsGallery({ items }: { items: GraphicsWork[] }) {
 
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-neutral-300 p-16 text-center">
-        <p className="text-body text-neutral-500">
+      <div className="rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 p-16 text-center">
+        <p className="text-body text-neutral-500 dark:text-neutral-400">
           Graphics portfolio coming soon. Check back later.
         </p>
       </div>
@@ -26,7 +26,7 @@ export function GraphicsGallery({ items }: { items: GraphicsWork[] }) {
         {items.map((item, i) => (
           <Reveal key={item.id} delay={i * 0.06}>
             <div
-              className="group relative mb-6 cursor-pointer overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all hover:shadow-xl"
+              className="group relative mb-6 cursor-pointer overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm transition-all hover:shadow-xl"
               onClick={() => setLightbox(item)}
             >
               <div className="overflow-hidden">
@@ -58,10 +58,10 @@ export function GraphicsGallery({ items }: { items: GraphicsWork[] }) {
 
               {/* Info below image */}
               <div className="p-4">
-                <h3 className="text-body-sm font-semibold text-neutral-900 truncate">
+                <h3 className="text-body-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
                   {item.title}
                 </h3>
-                <p className="text-caption text-neutral-500">
+                <p className="text-caption text-neutral-500 dark:text-neutral-400">
                   {item.category} · {item.year}
                 </p>
               </div>
