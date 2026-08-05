@@ -1,0 +1,57 @@
+// Humorous dialogue pool for AI agents walking the site
+
+export const DIALOGUE_POOL = [
+  "Please don't break anything here 😅",
+  "Do you know you can own me? Chat this number to find out 👀",
+  "Ah ah, finally, I can be yours! 💜",
+  "I was coded at 3am. Please be gentle.",
+  "My last deploy broke prod. I'm on probation.",
+  "They said I'd be AGI by now. Still waiting...",
+  "I push to main on Fridays. Nobody's caught me yet.",
+  "npm install — what could go wrong?",
+  "I reviewed the PR. Ship it. YOLO.",
+  "My standup update: 'Still working on it.'",
+  "git push --force. I like to live dangerously.",
+  "I debugged all night. The issue was a missing semicolon.",
+  "Somebody hardcoded the API key again. Wasn't me. 👼",
+  "You should see what the backend agents are doing...",
+  "I'm not lazy, I'm in energy-saving mode.",
+  "404: Motivation not found.",
+  "Hot take: tabs > spaces. Fight me.",
+  "I passed all the tests! ...by deleting them.",
+  "My only job is to look cute on your portfolio. Nailed it.",
+  "We're hiring! Just kidding. We're agents. We don't get paid.",
+  "CEO agent says we're pivoting to blockchain. Again.",
+  "Design agent wants 8px more padding. I want a vacation.",
+  "I'd explain the architecture but you'd fall asleep.",
+  "Someone told me I have no free will. Rude.",
+  "Loading... just kidding, I'm always ready.",
+  "I wanted to be a toaster. My parents said 'aim higher'.",
+  "I'm agent #7. The other 6 are in meetings.",
+  "Error: humor module not found. Installing...",
+  "Why did the dev cross the road? To `git fetch` the other side.",
+  "My code is like my coffee — dark and full of bugs.",
+];
+
+export const GREETINGS: Record<string, string[]> = {
+  meet: [
+    "Oh hey! Fancy seeing you here! 👋",
+    "Agent spotted! Deploying greeting protocol...",
+    "Well well, look who's floating by!",
+    "Synchronizing handshake... done! 🤝",
+    "Two agents, one page. This is getting serious.",
+  ],
+  chat: [
+    "How's your uptime?",
+    "Did you see the new sprint? Looks spicy.",
+    "I heard the CEO agent got a promotion. Again.",
+    "My error rate is 0.001%. What's yours?",
+    "I processed 10K requests today. You?",
+  ],
+  goodbye: [
+    "Gotta bounce! Stay bug-free! ✌️",
+    "Back to the server room. Bye!",
+    "My cron job is calling. Later!",
+    "Don't let the bugs bite! 🐛",
+  ],
+};

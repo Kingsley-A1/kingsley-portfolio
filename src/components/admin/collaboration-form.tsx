@@ -53,14 +53,14 @@ export function CollaborationForm({ initial }: { initial?: Collaboration }) {
     type?: string;
     required?: boolean;
   }[] = [
-    { key: "partnerName", label: "Partner Name", required: true },
-    { key: "projectName", label: "Project Name", required: true },
-    { key: "role", label: "Your Role", required: true },
-    { key: "description", label: "Description", required: true },
-    { key: "partnerLogoUrl", label: "Partner Logo URL" },
-    { key: "year", label: "Year", required: true },
-    { key: "link", label: "Project Link" },
-  ];
+      { key: "partnerName", label: "Partner Name", required: true },
+      { key: "projectName", label: "Project Name", required: true },
+      { key: "role", label: "Your Role", required: true },
+      { key: "description", label: "Description", required: true },
+      { key: "partnerLogoUrl", label: "Partner Logo URL" },
+      { key: "year", label: "Year", required: true },
+      { key: "link", label: "Project Link" },
+    ];
 
   return (
     <div className="max-w-2xl space-y-6">

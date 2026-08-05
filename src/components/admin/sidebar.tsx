@@ -98,7 +98,7 @@ export function AdminSidebar() {
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-neutral-950/60 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-50 bg-neutral-950/60 backdrop-blur-sm lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
