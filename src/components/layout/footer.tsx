@@ -1,0 +1,126 @@
+import Link from "next/link";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { PERSONA, SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
+
+const SOCIAL_ICONS: Record<string, string> = {
+  github: "GH",
+  linkedin: "LI",
+  twitter: "𝕏",
+  facebook: "FB",
+  instagram: "IG",
+  tiktok: "TT",
+};
+
+export function Footer({
+  socialLinks: dbLinks,
+}: {
+  socialLinks?: Record<string, string>;
+}) {
+  const year = new Date().getFullYear();
+  const links = { ...SOCIAL_LINKS, ...dbLinks };
+
+  const visibleSocials = Object.entries(links).filter(
+    ([key, url]) =>
+      key !== "email" && url && url.length > 5,
+  );
+
+  return (
+    <footer className="border-t border-neutral-200 bg-white">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <Link
+              href="/"
+              className="text-h4 font-bold tracking-tight text-neutral-900"
+            >
+              {PERSONA.name}
+            </Link>
+            <p className="mt-3 max-w-sm text-body-sm leading-relaxed text-neutral-500">
+              Full-stack software engineer building elegant, high-performance
+              digital experiences with modern web technologies.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {visibleSocials.map(([key, url]) => (
+                <a
+                  key={key}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-1.5 text-caption font-semibold text-neutral-500 transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-700"
+                  aria-label={key}
+                >
+                  <span className="text-[10px] font-bold">
+                    {SOCIAL_ICONS[key] ?? key.slice(0, 2).toUpperCase()}
+                  </span>
+                  <span className="hidden sm:inline">{key}</span>
+                </a>
+              ))}
+              <a
+                href={SOCIAL_LINKS.email}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-1.5 text-caption font-semibold text-neutral-500 transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-700"
+                aria-label="Email"
+              >
+                <Mail className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Email</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Quick links */}
+          <div>
+            <h4 className="text-body-sm font-semibold text-neutral-900">
+              Navigation
+            </h4>
+            <ul className="mt-4 space-y-2">
+              {[
+                { label: "About", href: "/about" },
+                { label: "Projects", href: "/projects" },
+                { label: "Graphics", href: "/graphics" },
+                { label: "Collaborations", href: "/collaborations" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-body-sm text-neutral-500 transition-colors hover:text-neutral-900"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-body-sm font-semibold text-neutral-900">
+              Contact
+            </h4>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <a
+                  href={`mailto:${PERSONA.email}`}
+                  className="inline-flex items-center gap-1 text-body-sm text-neutral-500 transition-colors hover:text-brand-blue"
+                >
+                  {PERSONA.email}
+                  <ArrowUpRight className="h-3 w-3" />
+                </a>
+              </li>
+              <li>
+                <span className="text-body-sm text-neutral-400">
+                  {PERSONA.location}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-neutral-100 pt-6 text-center">
+          <p className="text-caption text-neutral-400">
+            &copy; {year} {SITE_NAME}. Built with precision &amp; pride.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
