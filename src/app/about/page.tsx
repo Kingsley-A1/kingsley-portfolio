@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `About — ${PERSONA.name}`,
     description: `Full-stack engineer with ${PERSONA.yearsOfExperience} years of experience building elegant digital experiences.`,
-    images: [{ url: `${SITE_URL}/og.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
 };
 
@@ -39,33 +39,33 @@ export default async function AboutPage() {
       />
 
       {/* ── Story Section ─────────────────────────────────── */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white dark:bg-neutral-900 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid items-center gap-16 lg:grid-cols-2">
             {/* Photo card */}
             <Reveal>
-              <div className="relative mx-auto max-w-sm">
-                <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-brand-blue/20 via-brand-teal/20 to-brand-amber/20 blur-md" />
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-blue-surface via-brand-teal-surface to-brand-amber-surface p-1">
-                  <div className="aspect-[3/4] rounded-2xl bg-white flex items-center justify-center">
+              <div className="relative mx-auto max-w-sm min-h-[420px] sm:min-h-[480px]">
+                <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-brand-blue/20 via-brand-teal/20 to-brand-amber/20 dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-amber/10 blur-md" />
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-blue-surface via-brand-teal-surface to-brand-amber-surface dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-amber/10 p-1">
+                  <div className="aspect-[3/4] rounded-2xl bg-white dark:bg-neutral-800 flex items-center justify-center">
                     <div className="text-center p-10">
                       <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-teal text-4xl font-bold text-white shadow-xl">
                         {PERSONA.name.split(" ").map((n) => n[0]).join("")}
                       </div>
-                      <h2 className="mt-6 text-h4 font-bold text-neutral-900">
+                      <h2 className="mt-6 text-h4 font-bold text-neutral-900 dark:text-neutral-100">
                         {PERSONA.name}
                       </h2>
-                      <p className="mt-1 text-body text-neutral-500">
+                      <p className="mt-1 text-body text-neutral-500 dark:text-neutral-400">
                         {PERSONA.title}
                       </p>
-                      <div className="mt-4 flex flex-col gap-2 text-body-sm text-neutral-500">
+                      <div className="mt-4 flex flex-col gap-2 text-body-sm text-neutral-500 dark:text-neutral-400">
                         <span className="inline-flex items-center justify-center gap-1.5">
                           <MapPin className="h-4 w-4 text-brand-coral" />
                           {PERSONA.location}
                         </span>
                         <a
                           href={`mailto:${PERSONA.email}`}
-                          className="inline-flex items-center justify-center gap-1.5 text-brand-blue hover:underline"
+                          className="inline-flex items-center justify-center gap-1.5 text-brand-blue dark:text-brand-blue-bright hover:underline"
                         >
                           <Mail className="h-4 w-4" />
                           {PERSONA.email}
@@ -80,14 +80,14 @@ export default async function AboutPage() {
             {/* Story text */}
             <Reveal delay={0.1}>
               <div>
-                <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-teal">
+                <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-teal dark:text-brand-teal-bright">
                   My Story
                 </p>
-                <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900">
+                <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
                   From curiosity to{" "}
                   <span className="text-gradient-blue">craftsmanship</span>
                 </h2>
-                <div className="mt-6 space-y-4 text-body leading-body text-neutral-600">
+                <div className="mt-6 space-y-4 text-body leading-body text-neutral-600 dark:text-neutral-400">
                   <p>
                     {about?.extendedBio ||
                       `I'm ${PERSONA.name}, socially known as ${PERSONA.alias}. An Engineer, Technician, and Software Developer passionate about technology, professional marketing, public speaking, and making positive contributions toward changing the world.`}
@@ -103,14 +103,14 @@ export default async function AboutPage() {
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link
                     href="/projects"
-                    className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-2.5 text-body-sm font-semibold text-white transition-all hover:bg-neutral-800 hover:shadow-lg"
+                    className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200 px-5 py-2.5 text-body-sm font-semibold text-white transition-all hover:bg-neutral-800 hover:shadow-lg"
                   >
                     View my work
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 bg-white px-5 py-2.5 text-body-sm font-semibold text-neutral-700 transition-all hover:border-neutral-400"
+                    className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-5 py-2.5 text-body-sm font-semibold text-neutral-700 dark:text-neutral-300 transition-all hover:border-neutral-400 dark:hover:border-neutral-600"
                   >
                     Get in touch
                   </Link>
@@ -122,13 +122,13 @@ export default async function AboutPage() {
       </section>
 
       {/* ── Core Skills ──────────────────────────────────── */}
-      <section className="bg-neutral-50 py-20 sm:py-28">
+      <section className="bg-neutral-50 dark:bg-neutral-950 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-amber">
+            <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-amber dark:text-brand-amber-bright">
               Capabilities
             </p>
-            <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
               What I bring to the table
             </h2>
           </Reveal>
@@ -138,26 +138,26 @@ export default async function AboutPage() {
               const Icon = iconMap[skill.icon] || Code2;
               return (
                 <Reveal key={skill.name} delay={i * 0.08}>
-                  <div className="group h-full rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
+                  <div className="group h-full rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
                     <div
                       className={cn(
                         "mb-5 flex h-14 w-14 items-center justify-center rounded-2xl",
                         skill.color === "blue" &&
-                          "bg-brand-blue-surface text-brand-blue",
+                        "bg-brand-blue-surface dark:bg-brand-blue/15 text-brand-blue dark:text-brand-blue-bright",
                         skill.color === "teal" &&
-                          "bg-brand-teal-surface text-brand-teal",
+                        "bg-brand-teal-surface dark:bg-brand-teal/15 text-brand-teal dark:text-brand-teal-bright",
                         skill.color === "amber" &&
-                          "bg-brand-amber-surface text-brand-amber",
+                        "bg-brand-amber-surface dark:bg-brand-amber/15 text-brand-amber dark:text-brand-amber-bright",
                         skill.color === "coral" &&
-                          "bg-brand-coral-surface text-brand-coral",
+                        "bg-brand-coral-surface dark:bg-brand-coral/15 text-brand-coral dark:text-brand-coral-bright",
                       )}
                     >
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="text-h5 font-bold text-neutral-900">
+                    <h3 className="text-h5 font-bold text-neutral-900 dark:text-neutral-100">
                       {skill.name}
                     </h3>
-                    <p className="mt-2 text-body-sm leading-relaxed text-neutral-500">
+                    <p className="mt-2 text-body-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
                       {skill.description}
                     </p>
                   </div>
@@ -169,16 +169,16 @@ export default async function AboutPage() {
       </section>
 
       {/* ── Tech Stack ──────────────────────────────────── */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white dark:bg-neutral-900 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-blue">
+            <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-blue dark:text-brand-blue-bright">
               Tech Stack
             </p>
-            <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
               Technologies I work with
             </h2>
-            <p className="mt-3 text-body text-neutral-500">
+            <p className="mt-3 text-body text-neutral-500 dark:text-neutral-400">
               {PERSONA.yearsOfExperience} years of hands-on experience across the modern web stack.
             </p>
           </Reveal>
@@ -193,14 +193,14 @@ export default async function AboutPage() {
               ] as const
             ).map((group, i) => (
               <Reveal key={group.title} delay={i * 0.1}>
-                <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+                <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800/50 p-6">
                   <h3
                     className={cn(
                       "text-body-sm font-bold uppercase tracking-widest mb-4",
-                      group.color === "blue" && "text-brand-blue",
-                      group.color === "teal" && "text-brand-teal",
-                      group.color === "amber" && "text-brand-amber",
-                      group.color === "coral" && "text-brand-coral",
+                      group.color === "blue" && "text-brand-blue dark:text-brand-blue-bright",
+                      group.color === "teal" && "text-brand-teal dark:text-brand-teal-bright",
+                      group.color === "amber" && "text-brand-amber dark:text-brand-amber-bright",
+                      group.color === "coral" && "text-brand-coral dark:text-brand-coral-bright",
                     )}
                   >
                     {group.title}
@@ -209,7 +209,7 @@ export default async function AboutPage() {
                     {group.items.map((tech) => (
                       <li
                         key={tech}
-                        className="flex items-center gap-2 text-body-sm text-neutral-700"
+                        className="flex items-center gap-2 text-body-sm text-neutral-700 dark:text-neutral-300"
                       >
                         <span
                           className={cn(
@@ -236,10 +236,10 @@ export default async function AboutPage() {
         <section className="bg-animated-gradient py-20 sm:py-28">
           <div className="mx-auto max-w-4xl px-6 text-center">
             <Reveal>
-              <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-coral">
+              <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-coral dark:text-brand-coral-bright">
                 Beyond Code
               </p>
-              <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900">
+              <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
                 Interests &amp; Passions
               </h2>
             </Reveal>
@@ -248,7 +248,7 @@ export default async function AboutPage() {
                 {about.interests.map((interest) => (
                   <span
                     key={interest}
-                    className="rounded-full border border-neutral-300 bg-white/80 px-5 py-2.5 text-body font-medium text-neutral-700 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                    className="rounded-full border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 px-5 py-2.5 text-body font-medium text-neutral-700 dark:text-neutral-200 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
                   >
                     {interest}
                   </span>
@@ -260,10 +260,10 @@ export default async function AboutPage() {
       )}
 
       {/* ── CTA ──────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-neutral-900 py-20 sm:py-28">
+      <section className="relative overflow-hidden bg-neutral-900 dark:bg-neutral-950 py-20 sm:py-28">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-brand-teal/20 blur-3xl"
+          className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-brand-teal/20 dark:bg-brand-teal/10 blur-3xl"
         />
         <div className="relative mx-auto max-w-2xl px-6 text-center">
           <Reveal>
@@ -278,7 +278,7 @@ export default async function AboutPage() {
             <div className="mt-8">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-body font-semibold text-neutral-900 transition-all hover:bg-neutral-100 hover:shadow-lg"
+                className="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-neutral-100 px-6 py-3 text-body font-semibold text-neutral-900 dark:text-neutral-900 transition-all hover:bg-neutral-100 dark:hover:bg-white hover:shadow-lg"
               >
                 Get in touch
                 <ArrowRight className="h-4 w-4" />

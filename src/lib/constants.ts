@@ -43,6 +43,7 @@ export const NAV_LINKS = [
   { label: "Graphics", href: "/graphics" },
   { label: "Collaborations", href: "/collaborations" },
   { label: "Works", href: "/works" },
+  { label: "Docs", href: "/docs" },
 ] as const;
 
 // ── Social Links ───────────────────────────────────────────────────────────
