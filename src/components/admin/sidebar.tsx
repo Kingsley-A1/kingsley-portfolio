@@ -98,7 +98,7 @@ export function AdminSidebar() {
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-50 bg-neutral-950/60 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-neutral-950/60 backdrop-blur-sm lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
@@ -106,7 +106,7 @@ export function AdminSidebar() {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-64 border-r border-neutral-200 bg-white p-4 shadow-2xl transition-transform lg:static lg:translate-x-0 lg:shadow-none",
+          "fixed inset-y-0 left-0 z-50 w-64 border-r border-neutral-200 bg-white p-4 shadow-2xl transition-transform lg:static lg:translate-x-0 lg:shadow-none",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >

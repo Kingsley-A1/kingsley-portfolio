@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { FileOrUrlInput } from "@/components/admin/file-or-url-input";
 import type { GraphicsWork } from "@/features/admin/graphics-repository";
 
 const CATEGORIES = [
@@ -137,17 +138,12 @@ export function GraphicsForm({ initial }: { initial?: GraphicsWork }) {
           />
         </div>
 
-        <div>
-          <label className="block text-body-sm font-semibold text-neutral-900 mb-1.5">
-            Image URL *
-          </label>
-          <input
-            value={form.imageUrl}
-            onChange={(e) => update("imageUrl", e.target.value)}
-            className="w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-2.5 text-body focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/20"
-            placeholder="/graphics/my-design.png or https://..."
-          />
-        </div>
+        <FileOrUrlInput
+          label="Image *"
+          value={form.imageUrl}
+          onChange={(url) => update("imageUrl", url)}
+          placeholder="/graphics/my-design.png or https://..."
+        />
 
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 cursor-pointer">

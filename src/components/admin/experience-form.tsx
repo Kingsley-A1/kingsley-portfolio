@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Save, ArrowLeft, X } from "lucide-react";
 import Link from "next/link";
+import { FileOrUrlInput } from "@/components/admin/file-or-url-input";
 import type { WorkExperience } from "@/features/admin/experience-repository";
 
 export function ExperienceForm({ initial }: { initial?: WorkExperience }) {
@@ -190,17 +191,12 @@ export function ExperienceForm({ initial }: { initial?: WorkExperience }) {
           </div>
         </div>
 
-        <div>
-          <label className="block text-body-sm font-semibold text-neutral-900 mb-1.5">
-            Company Logo URL
-          </label>
-          <input
-            value={form.companyLogoUrl}
-            onChange={(e) => update("companyLogoUrl", e.target.value)}
-            className="w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-2.5 text-body focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/20"
-            placeholder="https://..."
-          />
-        </div>
+        <FileOrUrlInput
+          label="Company Logo"
+          value={form.companyLogoUrl}
+          onChange={(url) => update("companyLogoUrl", url)}
+          placeholder="https://..."
+        />
 
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 cursor-pointer">

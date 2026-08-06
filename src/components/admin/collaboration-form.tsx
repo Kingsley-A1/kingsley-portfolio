@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { FileOrUrlInput } from "@/components/admin/file-or-url-input";
 import type { Collaboration } from "@/features/admin/collaborations-repository";
 
 export function CollaborationForm({ initial }: { initial?: Collaboration }) {
@@ -53,14 +54,13 @@ export function CollaborationForm({ initial }: { initial?: Collaboration }) {
     type?: string;
     required?: boolean;
   }[] = [
-      { key: "partnerName", label: "Partner Name", required: true },
-      { key: "projectName", label: "Project Name", required: true },
-      { key: "role", label: "Your Role", required: true },
-      { key: "description", label: "Description", required: true },
-      { key: "partnerLogoUrl", label: "Partner Logo URL" },
-      { key: "year", label: "Year", required: true },
-      { key: "link", label: "Project Link" },
-    ];
+    { key: "partnerName", label: "Partner Name", required: true },
+    { key: "projectName", label: "Project Name", required: true },
+    { key: "role", label: "Your Role", required: true },
+    { key: "description", label: "Description", required: true },
+    { key: "year", label: "Year", required: true },
+    { key: "link", label: "Project Link" },
+  ];
 
   return (
     <div className="max-w-2xl space-y-6">
@@ -73,6 +73,13 @@ export function CollaborationForm({ initial }: { initial?: Collaboration }) {
       </Link>
 
       <div className="rounded-2xl border border-neutral-200 bg-white p-6 space-y-5">
+        <FileOrUrlInput
+          label="Partner Logo"
+          value={form.partnerLogoUrl}
+          onChange={(url) => update("partnerLogoUrl", url)}
+          placeholder="https://..."
+        />
+
         {fields.map(({ key, label, required }) => (
           <div key={key}>
             <label className="block text-body-sm font-semibold text-neutral-900 mb-1.5">
