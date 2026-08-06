@@ -4,15 +4,17 @@ import { PERSONA, STATS, CORE_SKILLS } from "@/lib/constants";
 import { listPublishedPortfolioProjectsSafe } from "@/features/admin/projects-repository";
 import { listPublishedCollaborationsSafe } from "@/features/admin/collaborations-repository";
 import { listPublishedExperienceSafe } from "@/features/admin/experience-repository";
+import { getAboutSafe } from "@/features/admin/about-repository";
 import { Reveal } from "@/components/marketing/reveal";
 import { TerminalUI } from "@/components/marketing/terminal-ui";
 import { cn } from "@/lib/utils";
 
 export default async function HomePage() {
-  const [projects, collaborations, experiences] = await Promise.all([
+  const [projects, collaborations, experiences, about] = await Promise.all([
     listPublishedPortfolioProjectsSafe(),
     listPublishedCollaborationsSafe(),
     listPublishedExperienceSafe(),
+    getAboutSafe(),
   ]);
 
   const featured = projects.filter((p) => p.featured && !p.comingSoon).slice(0, 4);
@@ -120,8 +122,16 @@ export default async function HomePage() {
                   <div className="aspect-[3/4] w-full overflow-hidden rounded-xl bg-gradient-to-br from-brand-blue-surface via-brand-teal-surface to-brand-amber-surface dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-amber/10">
                     <div className="flex h-full items-center justify-center">
                       <div className="text-center p-8">
-                        <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue via-brand-teal to-brand-amber text-3xl font-bold text-white shadow-lg ring-4 ring-white dark:ring-neutral-800">
-                          {PERSONA.name.split(" ").map((n) => n[0]).join("")}
+                        <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue via-brand-teal to-brand-amber text-3xl font-bold text-white shadow-lg ring-4 ring-white dark:ring-neutral-800 overflow-hidden">
+                          {about?.photoUrl ? (
+                            <img
+                              src={about.photoUrl}
+                              alt={PERSONA.name}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            PERSONA.name.split(" ").map((n) => n[0]).join("")
+                          )}
                         </div>
                         <h2 className="text-h4 font-bold text-neutral-900 dark:text-neutral-100">
                           {PERSONA.name}

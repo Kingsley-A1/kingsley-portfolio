@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Save, Plus, Globe } from "lucide-react";
 import type { AboutContent } from "@/features/admin/about-repository";
+import { FileOrUrlInput } from "@/components/admin/file-or-url-input";
 import { cn } from "@/lib/utils";
 
 const INTEREST_OPTIONS = [
@@ -41,6 +42,7 @@ export function AboutEditor({ initial }: { initial: AboutContent | null }) {
     extendedBio: initial?.extendedBio ?? "",
     interests: initial?.interests ?? [],
     socialLinks: initial?.socialLinks ?? ({} as Record<string, string>),
+    photoUrl: initial?.photoUrl ?? "",
   });
 
   function toggleInterest(interest: string) {
@@ -83,6 +85,16 @@ export function AboutEditor({ initial }: { initial: AboutContent | null }) {
           onChange={(e) => setForm((p) => ({ ...p, headline: e.target.value }))}
           placeholder="Engineer focused on value creation and business impact."
           className="w-full rounded-xl border border-neutral-300 bg-neutral-50 px-4 py-2.5 text-body text-neutral-900 placeholder:text-neutral-400 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/20"
+        />
+      </div>
+
+      {/* Photo */}
+      <div className="rounded-2xl border border-neutral-200 bg-white p-6">
+        <FileOrUrlInput
+          label="Profile Photo"
+          value={form.photoUrl}
+          onChange={(url) => setForm((p) => ({ ...p, photoUrl: url }))}
+          placeholder="https://... or upload a file"
         />
       </div>
 

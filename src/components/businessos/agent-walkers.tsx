@@ -64,7 +64,7 @@ export function AgentWalkers() {
           message: pick(DIALOGUE_POOL),
           showBubble: false,
           bubbleVisibleSince: 0,
-          speed: 0.03 + Math.random() * 0.04,
+          speed: 0.015 + Math.random() * 0.02,
           pauseUntil: 0,
           phase: "walking",
           spawnedAt: now,
@@ -81,16 +81,22 @@ export function AgentWalkers() {
           w.x += dx;
 
           // Entered center zone? Show bubble reliably
-          const inCenter = w.x > 35 && w.x < 65;
+          const inCenter = w.x > 30 && w.x < 70;
           if (inCenter && !w.enteredCenter) {
             w.enteredCenter = true;
             w.showBubble = true;
             w.bubbleVisibleSince = now;
           }
-
-          // Auto-hide bubble after 5s
-          if (w.showBubble && now - w.bubbleVisibleSince > 5000) {
+          // Reset when leaving center
+          if (!inCenter && w.enteredCenter) {
+            w.enteredCenter = false;
             w.showBubble = false;
+          }
+
+          // Auto-hide bubble after 8s if still in center (refresh message)
+          if (w.showBubble && w.enteredCenter && now - w.bubbleVisibleSince > 8000) {
+            w.message = pick(DIALOGUE_POOL);
+            w.bubbleVisibleSince = now;
           }
 
           // Random pause in center
