@@ -13,6 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/collaborations`, changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${baseUrl}/works`, changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${baseUrl}/contact`, changeFrequency: "monthly" as const, priority: 0.6 },
+    // /docs (internal changelog) and /businessos (interactive agent-network
+    // demo) are deliberately excluded: neither is a canonical, search-worthy
+    // landing page — they're linked in-app for visitors who find them, not
+    // meant to rank or draw organic search traffic.
   ];
 
   return staticPages.map((page) => ({

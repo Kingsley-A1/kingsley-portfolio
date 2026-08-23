@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Projects — ${PERSONA.name}`,
     description: "From government portals to fashion platforms — explore the portfolio of engineering excellence.",
-    images: [{ url: `${SITE_URL}/og.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
 };
 
@@ -28,7 +28,6 @@ export default async function ProjectsPage() {
         label="Projects"
         title="Products shipped with purpose."
         description="Explore production systems, customer experiences, and digital products engineered to solve real business problems."
-        gradient="blue"
       />
 
       {/* ── Stats Bar ───────────────────────────────────── */}
@@ -57,7 +56,7 @@ export default async function ProjectsPage() {
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mb-12">
             <h2 className="text-h2 font-bold text-neutral-900 dark:text-neutral-100">
-              The <span className="text-gradient-blue">portfolio</span>
+              The <span className="text-brand-blue dark:text-brand-blue-bright">portfolio</span>
             </h2>
             <p className="mt-2 text-body text-neutral-500 dark:text-neutral-400 max-w-xl">
               Filter by platform type. Projects marked &quot;Coming Soon&quot; are

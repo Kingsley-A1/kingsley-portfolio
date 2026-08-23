@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Building2, Calendar, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Building2, Calendar } from "lucide-react";
 import { PageHero } from "@/components/marketing/page-hero";
 import { Reveal } from "@/components/marketing/reveal";
 import { listPublishedExperienceSafe } from "@/features/admin/experience-repository";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Work Experience — ${PERSONA.name}`,
     description: `Career journey across ${PERSONA.yearsOfExperience} years in software engineering and technology.`,
-    images: [{ url: `${SITE_URL}/og.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
 };
 
@@ -26,7 +27,6 @@ export default async function WorksPage() {
         label="Experience"
         title="Where I have made an impact."
         description={`A timeline of roles, companies, and projects across ${PERSONA.yearsOfExperience} years in software engineering and technology.`}
-        gradient="blue"
       />
 
       <section className="bg-white dark:bg-neutral-900 py-20 sm:py-28">
@@ -94,12 +94,14 @@ export default async function WorksPage() {
                             </span>
 
                             <div className="flex items-start gap-3">
-                              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800">
+                              <div className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800">
                                 {exp.companyLogoUrl ? (
-                                  <img
+                                  <Image
                                     src={exp.companyLogoUrl}
                                     alt={exp.company}
-                                    className="h-6 w-6 object-contain"
+                                    fill
+                                    sizes="40px"
+                                    className="object-contain p-2"
                                   />
                                 ) : (
                                   <Building2 className="h-5 w-5 text-neutral-400 dark:text-neutral-500" />

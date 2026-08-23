@@ -27,7 +27,7 @@ export default function ContactPage() {
 
           <h1 className="text-h1 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
             Let&apos;s work{" "}
-            <span className="text-gradient-blue">together</span>
+            <span className="text-brand-blue dark:text-brand-blue-bright">together</span>
           </h1>
           <p className="mt-4 text-body-lg leading-body text-neutral-500 dark:text-neutral-400">
             Have a project in mind? I&apos;d love to hear about it. Reach out

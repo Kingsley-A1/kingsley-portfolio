@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Docs — ${PERSONA.name}`,
     description: "Release notes, technical specifications, and version history.",
-    images: [{ url: `${SITE_URL}/og.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
 };
 
@@ -146,7 +146,6 @@ export default function DocsPage() {
         label="Documentation"
         title="Versioned release notes & technical reference."
         description="Track changes, understand the architecture, and reference the tech stack that powers this portfolio."
-        gradient="blue"
       />
 
       {/* ── Tech Specs ──────────────────────────────────── */}
@@ -154,7 +153,7 @@ export default function DocsPage() {
         <div className="mx-auto max-w-5xl px-6">
           <Reveal>
             <h2 className="text-h2 font-bold text-neutral-900 dark:text-white mb-10">
-              Technical <span className="text-gradient-blue">specifications</span>
+              Technical <span className="text-brand-blue dark:text-brand-blue-bright">specifications</span>
             </h2>
           </Reveal>
 
@@ -180,7 +179,7 @@ export default function DocsPage() {
         <div className="mx-auto max-w-4xl px-6">
           <Reveal className="mb-12">
             <h2 className="text-h2 font-bold text-neutral-900 dark:text-white">
-              Version <span className="text-gradient-blue">history</span>
+              Version <span className="text-brand-blue dark:text-brand-blue-bright">history</span>
             </h2>
             <p className="mt-2 text-body text-neutral-500 dark:text-neutral-400">
               Semantic versioning. All dates in YYYY-MM-DD format.

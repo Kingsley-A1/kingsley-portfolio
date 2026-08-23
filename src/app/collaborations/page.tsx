@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { PageHero } from "@/components/marketing/page-hero";
 import { Reveal } from "@/components/marketing/reveal";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Collaborations — ${PERSONA.name}`,
     description: "Partnering with brands, businesses, and creators to build impactful digital experiences.",
-    images: [{ url: `${SITE_URL}/og.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
 };
 
@@ -33,7 +34,6 @@ export default async function CollaborationsPage() {
         label="Collaborations"
         title="Great things are built together."
         description="Partnerships and joint projects with brands, businesses, and creators — each one a story of shared vision and execution."
-        gradient="full"
       />
 
       <section className="bg-white dark:bg-neutral-900 py-20 sm:py-28">
@@ -56,12 +56,14 @@ export default async function CollaborationsPage() {
                   >
                     <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
                       {/* Partner logo */}
-                      <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-neutral-100 dark:bg-neutral-800">
+                      <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-neutral-100 dark:bg-neutral-800">
                         {collab.partnerLogoUrl ? (
-                          <img
+                          <Image
                             src={collab.partnerLogoUrl}
                             alt={collab.partnerName}
-                            className="h-10 w-10 object-contain"
+                            fill
+                            sizes="64px"
+                            className="object-contain p-3"
                           />
                         ) : (
                           <span className="text-h4 font-bold text-neutral-300 dark:text-neutral-600">

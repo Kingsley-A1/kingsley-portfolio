@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Graphics — ${PERSONA.name}`,
     description: "Brand identity, marketing collateral, and visual storytelling for businesses and campaigns.",
-    images: [{ url: `${SITE_URL}/og.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
 };
 
@@ -25,14 +25,13 @@ export default async function GraphicsPage() {
         label="Graphics"
         title="Visual storytelling meets design precision."
         description="Curated design work — brand assets, posters, banners, and social graphics created for campaigns and clients."
-        gradient="warm"
       />
 
       <section className="bg-white dark:bg-neutral-900 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mb-12">
             <h2 className="text-h2 font-bold text-neutral-900 dark:text-neutral-100">
-              Design <span className="text-gradient-warm">portfolio</span>
+              Design <span className="text-brand-blue dark:text-brand-blue-bright">portfolio</span>
             </h2>
             <p className="mt-2 text-body text-neutral-500 dark:text-neutral-400 max-w-xl">
               {graphics.length} works spanning branding, social media, print, and more.
