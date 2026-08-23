@@ -68,11 +68,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: "/apple-icon.svg",
-    shortcut: "/icon.svg",
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/icon-32.png",
   },
   verification: {
     // Add your Google Search Console verification code here when available
@@ -126,7 +127,7 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* Inline theme script to prevent flash */}
+        {/* Inline theme script to prevent flash. Static string only — never interpolate user input here, it runs unsandboxed before hydration. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

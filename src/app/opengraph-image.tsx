@@ -1,12 +1,21 @@
 import { ImageResponse } from "next/og";
-import { PERSONA, SITE_DESCRIPTION } from "@/lib/constants";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { PERSONA } from "@/lib/constants";
 
-export const runtime = "edge";
+// Node runtime (not edge) so the photo can be read straight off disk —
+// no network round-trip to our own domain, which would hang if that
+// domain isn't reachable yet (e.g. before first deploy).
 export const alt = PERSONA.name;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const photoBuffer = await readFile(
+    path.join(process.cwd(), "public", "og-photo.jpg"),
+  );
+  const photoUrl = `data:image/jpeg;base64,${photoBuffer.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -14,119 +23,122 @@ export default function OpenGraphImage() {
           height: "100%",
           width: "100%",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "linear-gradient(135deg, #171717 0%, #262626 100%)",
+          background: "#0a0a0a",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Background glow orbs */}
+        {/* Single-accent glow — no rainbow */}
         <div
           style={{
             position: "absolute",
-            top: "-20%",
-            right: "-10%",
-            width: "600px",
-            height: "600px",
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-20%",
+            top: "-30%",
             left: "-10%",
-            width: "500px",
-            height: "500px",
+            width: "700px",
+            height: "700px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(13,148,136,0.20) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: "40%",
-            right: "30%",
-            width: "300px",
-            height: "300px",
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(217,119,6,0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(37,99,235,0.30) 0%, transparent 70%)",
           }}
         />
 
-        {/* Main content */}
+        {/* Left: photo, full-bleed, duotone-treated via overlay */}
+        <div
+          style={{
+            display: "flex",
+            position: "relative",
+            width: "440px",
+            height: "100%",
+            flexShrink: 0,
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={photoUrl}
+            alt=""
+            width={440}
+            height={630}
+            style={{ width: "440px", height: "630px", objectFit: "cover" }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(90deg, rgba(10,10,10,0) 60%, #0a0a0a 100%)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(180deg, rgba(37,99,235,0.18) 0%, rgba(10,10,10,0.1) 100%)",
+            }}
+          />
+        </div>
+
+        {/* Right: identity */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
             justifyContent: "center",
-            padding: "0 80px",
+            padding: "0 64px",
+            position: "relative",
           }}
         >
-          {/* Initials badge */}
           <div
             style={{
-              width: "120px",
-              height: "120px",
-              borderRadius: "32px",
-              background: "linear-gradient(135deg, #2563eb, #0d9488, #d97706)",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              marginBottom: "32px",
-              fontSize: "52px",
-              fontWeight: 700,
-              color: "white",
-              fontFamily: "system-ui, -apple-system, sans-serif",
+              gap: "10px",
+              marginBottom: "24px",
             }}
           >
-            {PERSONA.name.split(" ").map((n) => n[0]).join("")}
+            <div
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                background: "#3b82f6",
+              }}
+            />
+            <span
+              style={{
+                fontSize: "20px",
+                fontWeight: 600,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#3b82f6",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+              }}
+            >
+              {PERSONA.title}
+            </span>
           </div>
 
-          {/* Name */}
           <div
             style={{
-              fontSize: "56px",
+              fontSize: "58px",
               fontWeight: 700,
               color: "#fafafa",
               fontFamily: "system-ui, -apple-system, sans-serif",
               letterSpacing: "-0.02em",
-              textAlign: "center",
-              marginBottom: "12px",
+              lineHeight: 1.1,
+              marginBottom: "20px",
             }}
           >
             {PERSONA.name}
           </div>
 
-          {/* Title */}
           <div
             style={{
-              fontSize: "28px",
+              fontSize: "24px",
               color: "#a3a3a3",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              textAlign: "center",
-              marginBottom: "16px",
-            }}
-          >
-            {PERSONA.title}
-          </div>
-
-          {/* Description */}
-          <div
-            style={{
-              fontSize: "20px",
-              color: "#737373",
-              fontFamily: "system-ui, -apple-system, sans-serif",
-              textAlign: "center",
-              maxWidth: "700px",
               lineHeight: 1.5,
+              maxWidth: "620px",
             }}
           >
-            {SITE_DESCRIPTION.slice(0, 120)}…
+            Engineer. Creator. Problem solver.
           </div>
         </div>
       </div>
