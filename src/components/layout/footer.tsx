@@ -46,8 +46,8 @@ export function Footer({
               {PERSONA.name}
             </Link>
             <p className="mt-3 max-w-sm text-body-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-              Full-stack software engineer building elegant, high-performance
-              digital experiences with modern web technologies.
+              Full-stack engineering, applied AI, and design — one person
+              shipping across the whole stack, end to end.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {visibleSocials.map(([key, url]) => {

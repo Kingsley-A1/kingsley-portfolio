@@ -6,8 +6,10 @@ export const PERSONA = {
   title: "Full-Stack Software Engineer",
   tagline: "I build elegant, high-performance digital experiences.",
   headline: "Engineer focused on value creation and business impact.",
+  focusStatement:
+    "Going deeper into machine learning and applied AI — the belief that the next generation of software is built by engineers fluent in both systems and models.",
   location: "Calabar, Nigeria",
-  email: "blessedkingkingsley2002@gmail.com",
+  email: "kingsley@bespoketech.com.ng",
   phone: "+234 808 807 1657",
   yearsOfExperience: 4,
 } as const;
@@ -25,12 +27,12 @@ export const TECH_STACK = {
   frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion"],
   backend: ["NestJS", "Node.js", "PostgreSQL", "CockroachDB", "Prisma"],
   tools: ["Git", "Docker", "Vercel", "Cloudflare", "Figma", "AWS S3/R2"],
-  learning: ["Rust", "Go", "Kubernetes"],
+  learning: ["Machine Learning", "PyTorch", "Applied AI Systems", "Rust"],
 } as const;
 
 export const ALL_TECH = [
-  ...TECH_STACK.frontend,
   ...TECH_STACK.backend,
+  ...TECH_STACK.frontend,
   ...TECH_STACK.tools,
 ];
 
@@ -92,10 +94,10 @@ export const CORE_SKILLS = [
     color: "amber",
   },
   {
-    name: "Technical Leadership",
+    name: "Machine Learning & Applied AI",
     description:
-      "End-to-end project ownership, client communication, and delivery accountability.",
-    icon: "GitBranch",
+      "Model integration, fine-tuning, and AI-native product systems — the layer I'm deliberately building toward.",
+    icon: "Brain",
     color: "coral",
   },
 ] as const;
