@@ -14,6 +14,7 @@ import {
 import { AgentCard } from "@/components/businessos/agent-card";
 import { ActivityFeed } from "@/components/businessos/activity-feed";
 import { CommandBar } from "@/components/businessos/command-bar";
+import { AgentWalkers } from "@/components/businessos/agent-walkers";
 import { AGENTS, RECENT_HANDOFFS } from "@/features/businessos/data";
 import { cn } from "@/lib/utils";
 import type { AgentRole } from "@/features/businessos/data";
@@ -64,6 +65,9 @@ export default function BusinessOSPage() {
 
   return (
     <div className="min-h-screen bg-neutral-950">
+      {/* Agent walkers are scoped to this route only — see public-shell.tsx */}
+      <AgentWalkers />
+
       {/* ── Header ──────────────────────────────────────── */}
       <header className="sticky top-0 z-40 border-b border-neutral-800 bg-neutral-950/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">

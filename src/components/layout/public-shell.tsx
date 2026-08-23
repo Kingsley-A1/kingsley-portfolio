@@ -5,20 +5,11 @@ import { usePathname } from "next/navigation";
 import { Header } from "./header";
 import { Footer } from "./footer";
 import { PageLoadingBar } from "./page-loading-bar";
-import { AgentWalkers } from "@/components/businessos/agent-walkers";
 
 function LoadingBarWrapper() {
   return (
     <Suspense fallback={null}>
       <PageLoadingBar />
-    </Suspense>
-  );
-}
-
-function AgentWalkersWrapper() {
-  return (
-    <Suspense fallback={null}>
-      <AgentWalkers />
     </Suspense>
   );
 }
@@ -30,6 +21,8 @@ export function PublicShell({
 }) {
   const pathname = usePathname();
 
+  // /businessos and /admin render their own chrome — Agent walkers live
+  // exclusively on /businessos, never on marketing pages.
   if (pathname.startsWith("/admin") || pathname === "/businessos") {
     return <>{children}</>;
   }
@@ -37,7 +30,6 @@ export function PublicShell({
   return (
     <>
       <LoadingBarWrapper />
-      <AgentWalkersWrapper />
       <Header />
       <main className="flex flex-1 flex-col">{children}</main>
       <Footer />
