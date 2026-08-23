@@ -6,17 +6,6 @@ import { redirect } from "next/navigation";
 const SESSION_COOKIE = "kp_admin_session";
 const SESSION_MAX_AGE = 60 * 60 * 12; // 12 hours
 
-function simpleHash(input: string): string {
-  // Simple but sufficient for a solo-admin portfolio
-  let hash = 0;
-  for (let i = 0; i < input.length; i++) {
-    const char = input.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash |= 0;
-  }
-  return Math.abs(hash).toString(36);
-}
-
 function createToken(): string {
   const bytes = new Uint8Array(32);
   crypto.getRandomValues(bytes);

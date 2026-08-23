@@ -1,8 +1,21 @@
 import { verifyAdminPassword, createAdminSession } from "@/lib/admin-auth";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
+    const ip = getClientIp(request);
+    const rateLimit = checkRateLimit(`admin-login:${ip}`);
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: "Too many attempts. Try again later." },
+        {
+          status: 429,
+          headers: { "Retry-After": String(rateLimit.retryAfterSeconds) },
+        },
+      );
+    }
+
     const { password } = await request.json();
     if (!password || typeof password !== "string") {
       return NextResponse.json(
