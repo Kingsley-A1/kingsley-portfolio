@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Code2, Terminal, Palette, GitBranch, MapPin, Mail, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { Code2, Terminal, Palette, Brain, MapPin, Mail, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { PageHero } from "@/components/marketing/page-hero";
 import { Reveal } from "@/components/marketing/reveal";
 import { getAboutSafe } from "@/features/admin/about-repository";
 import { PERSONA, TECH_STACK, CORE_SKILLS } from "@/lib/constants";
@@ -23,7 +23,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Braces: Code2,
   Terminal: Terminal,
   Palette: Palette,
-  GitBranch: GitBranch,
+  Brain: Brain,
 };
 
 export default async function AboutPage() {
@@ -31,89 +31,93 @@ export default async function AboutPage() {
 
   return (
     <>
-      <PageHero
-        label="About"
-        title="Engineer. Creator. Problem solver."
-        description="A blend of technical precision, creative thinking, and a relentless drive to build things that matter."
-        gradient="full"
-      />
-
-      {/* ── Story Section ─────────────────────────────────── */}
-      <section className="bg-white dark:bg-neutral-900 py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            {/* Photo card */}
+      {/* ── Editorial split hero — deliberately distinct from the centered
+           PageHero recipe used on Projects/Graphics/Collaborations/Works ── */}
+      <section className="relative overflow-hidden border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 pt-20 sm:pt-24">
+        <div className="mx-auto grid max-w-7xl gap-y-12 px-6 pb-16 sm:pb-20 lg:grid-cols-12 lg:gap-x-10">
+          {/* Text column — leads with conviction, not a resume opener */}
+          <div className="lg:col-span-7 lg:pt-6">
             <Reveal>
-              <div className="relative mx-auto max-w-sm min-h-[420px] sm:min-h-[480px]">
-                <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-brand-blue/20 via-brand-teal/20 to-brand-amber/20 dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-amber/10 blur-md" />
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-blue-surface via-brand-teal-surface to-brand-amber-surface dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-amber/10 p-1">
-                  <div className="aspect-[3/4] rounded-2xl bg-white dark:bg-neutral-800 flex items-center justify-center">
-                    <div className="text-center p-10">
-                      <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-teal text-4xl font-bold text-white shadow-xl">
-                        {PERSONA.name.split(" ").map((n) => n[0]).join("")}
-                      </div>
-                      <h2 className="mt-6 text-h4 font-bold text-neutral-900 dark:text-neutral-100">
-                        {PERSONA.name}
-                      </h2>
-                      <p className="mt-1 text-body text-neutral-500 dark:text-neutral-400">
-                        {PERSONA.title}
-                      </p>
-                      <div className="mt-4 flex flex-col gap-2 text-body-sm text-neutral-500 dark:text-neutral-400">
-                        <span className="inline-flex items-center justify-center gap-1.5">
-                          <MapPin className="h-4 w-4 text-brand-coral" />
-                          {PERSONA.location}
-                        </span>
-                        <a
-                          href={`mailto:${PERSONA.email}`}
-                          className="inline-flex items-center justify-center gap-1.5 text-brand-blue dark:text-brand-blue-bright hover:underline"
-                        >
-                          <Mail className="h-4 w-4" />
-                          {PERSONA.email}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-blue dark:text-brand-blue-bright">
+                About
+              </p>
+              <h1 className="mt-4 text-h1 sm:text-display font-bold leading-[1.05] tracking-tight text-neutral-900 dark:text-neutral-50">
+                I build what other people
+                <br />
+                call impossible.
+              </h1>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <div className="mt-7 space-y-5 max-w-xl text-body sm:text-body-lg leading-body text-neutral-600 dark:text-neutral-400">
+                <p>
+                  {about?.extendedBio ||
+                    `I'm ${PERSONA.name}, socially known as ${PERSONA.alias}. I don't think of engineering as a job — it's the way I test my own belief that almost anything can be built if you're precise enough about how you think.`}
+                </p>
+                <p>
+                  I'm a full-stack engineer first, but I read code like an
+                  advocate for the craft: convinced that good software is a
+                  discipline, not a talent, and that the people who go
+                  furthest are the ones who stay curious long after the
+                  tutorial ends. {PERSONA.focusStatement}
+                </p>
+                <p>
+                  Outside the editor, I chase the same conviction through
+                  public speaking, marketing, and graphic design — different
+                  languages for the same instinct: find the thing that
+                  seems too ambitious, then go build it anyway.
+                </p>
               </div>
             </Reveal>
 
-            {/* Story text */}
-            <Reveal delay={0.1}>
-              <div>
-                <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-teal dark:text-brand-teal-bright">
-                  My Story
-                </p>
-                <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-                  From curiosity to{" "}
-                  <span className="text-gradient-blue">craftsmanship</span>
-                </h2>
-                <div className="mt-6 space-y-4 text-body leading-body text-neutral-600 dark:text-neutral-400">
-                  <p>
-                    {about?.extendedBio ||
-                      `I'm ${PERSONA.name}, socially known as ${PERSONA.alias}. An Engineer, Technician, and Software Developer passionate about technology, professional marketing, public speaking, and making positive contributions toward changing the world.`}
-                  </p>
-                  <p>
-                    I enjoy creating things, graphic design, and diving deep into
-                    research. My technical side thrives in Next.js, NestJS, and
-                    crafting premium digital experiences. Outside tech, I cherish
-                    expression — through public speaking, marketing, and writing.
-                  </p>
-                </div>
+            <Reveal delay={0.16}>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-neutral-900 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200 px-5 py-2.5 text-body-sm font-semibold text-white transition-all hover:bg-neutral-800 hover:shadow-lg"
+                >
+                  View my work
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-5 py-2.5 text-body-sm font-semibold text-neutral-700 dark:text-neutral-300 transition-all hover:border-neutral-400 dark:hover:border-neutral-600"
+                >
+                  Get in touch
+                </Link>
+                <span className="inline-flex items-center gap-1.5 text-body-sm text-neutral-500 dark:text-neutral-400">
+                  <MapPin className="h-4 w-4 text-brand-blue dark:text-brand-blue-bright" />
+                  {PERSONA.location}
+                </span>
+              </div>
+            </Reveal>
+          </div>
 
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Link
-                    href="/projects"
-                    className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200 px-5 py-2.5 text-body-sm font-semibold text-white transition-all hover:bg-neutral-800 hover:shadow-lg"
+          {/* Photo column — structural, sharper-cornered frame (radius hierarchy) */}
+          <div className="lg:col-span-5">
+            <Reveal delay={0.1}>
+              <div className="relative mx-auto max-w-sm lg:ml-auto lg:mr-0">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800">
+                  <Image
+                    src={about?.photoUrl || "/photos/thinking.webp"}
+                    alt={PERSONA.name}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 400px, 80vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-5 -left-5 hidden sm:flex flex-col gap-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-4 py-3 shadow-lg">
+                  <p className="text-body-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                    {PERSONA.name}
+                  </p>
+                  <a
+                    href={`mailto:${PERSONA.email}`}
+                    className="inline-flex items-center gap-1.5 text-caption font-medium text-neutral-500 dark:text-neutral-400 hover:text-brand-blue dark:hover:text-brand-blue-bright"
                   >
-                    View my work
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-5 py-2.5 text-body-sm font-semibold text-neutral-700 dark:text-neutral-300 transition-all hover:border-neutral-400 dark:hover:border-neutral-600"
-                  >
-                    Get in touch
-                  </Link>
+                    <Mail className="h-3.5 w-3.5" />
+                    {PERSONA.email}
+                  </a>
                 </div>
               </div>
             </Reveal>
@@ -125,7 +129,7 @@ export default async function AboutPage() {
       <section className="bg-neutral-50 dark:bg-neutral-950 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-amber dark:text-brand-amber-bright">
+            <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-blue dark:text-brand-blue-bright">
               Capabilities
             </p>
             <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
@@ -179,7 +183,7 @@ export default async function AboutPage() {
               Technologies I work with
             </h2>
             <p className="mt-3 text-body text-neutral-500 dark:text-neutral-400">
-              {PERSONA.yearsOfExperience} years of hands-on experience across the modern web stack.
+              {PERSONA.yearsOfExperience} years of hands-on experience across the modern web stack — and the ground I&apos;m covering next.
             </p>
           </Reveal>
 
@@ -189,7 +193,7 @@ export default async function AboutPage() {
                 { title: "Frontend", items: TECH_STACK.frontend, color: "blue" },
                 { title: "Backend", items: TECH_STACK.backend, color: "teal" },
                 { title: "Tools & Infra", items: TECH_STACK.tools, color: "amber" },
-                { title: "Learning", items: TECH_STACK.learning, color: "coral" },
+                { title: "Learning: ML & AI", items: TECH_STACK.learning, color: "coral" },
               ] as const
             ).map((group, i) => (
               <Reveal key={group.title} delay={i * 0.1}>
@@ -236,7 +240,7 @@ export default async function AboutPage() {
         <section className="bg-animated-gradient py-20 sm:py-28">
           <div className="mx-auto max-w-4xl px-6 text-center">
             <Reveal>
-              <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-coral dark:text-brand-coral-bright">
+              <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-blue dark:text-brand-blue-bright">
                 Beyond Code
               </p>
               <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
@@ -263,13 +267,13 @@ export default async function AboutPage() {
       <section className="relative overflow-hidden bg-neutral-900 dark:bg-neutral-950 py-20 sm:py-28">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-brand-teal/20 dark:bg-brand-teal/10 blur-3xl"
+          className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-brand-blue/20 dark:bg-brand-blue/10 blur-3xl"
         />
         <div className="relative mx-auto max-w-2xl px-6 text-center">
           <Reveal>
             <h2 className="text-h2 font-bold text-white">
               Let&apos;s work{" "}
-              <span className="text-gradient-warm">together</span>
+              <span className="text-brand-blue-bright">together</span>
             </h2>
             <p className="mt-4 text-body-lg leading-body text-neutral-400">
               I&apos;m currently open to freelance projects and full-time
@@ -278,7 +282,7 @@ export default async function AboutPage() {
             <div className="mt-8">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-neutral-100 px-6 py-3 text-body font-semibold text-neutral-900 dark:text-neutral-900 transition-all hover:bg-neutral-100 dark:hover:bg-white hover:shadow-lg"
+                className="inline-flex items-center gap-2 rounded-2xl bg-white dark:bg-neutral-100 px-6 py-3 text-body font-semibold text-neutral-900 dark:text-neutral-900 transition-all hover:bg-neutral-100 dark:hover:bg-white hover:shadow-lg"
               >
                 Get in touch
                 <ArrowRight className="h-4 w-4" />

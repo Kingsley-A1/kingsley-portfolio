@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowDown, ArrowRight, Download, ExternalLink, Building2, Braces, Terminal, Palette, GitBranch } from "lucide-react";
-import { PERSONA, STATS, CORE_SKILLS } from "@/lib/constants";
+import Image from "next/image";
+import { ArrowDown, ArrowRight, Download, ExternalLink, Building2, Braces, Terminal, Palette, Brain } from "lucide-react";
+import { PERSONA, CORE_SKILLS } from "@/lib/constants";
 import { listPublishedPortfolioProjectsSafe } from "@/features/admin/projects-repository";
 import { listPublishedCollaborationsSafe } from "@/features/admin/collaborations-repository";
 import { listPublishedExperienceSafe } from "@/features/admin/experience-repository";
@@ -23,29 +24,14 @@ export default async function HomePage() {
     <>
       {/* ── Hero ──────────────────────────────────────────── */}
       <section className="relative flex min-h-screen items-center overflow-hidden bg-hero-chrome hero-grid pt-16 sm:pt-20">
-        {/* Chrome color blobs — vibrant but not noisy */}
+        {/* Single deliberate ambient effect — one signature-accent blob, no rainbow */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-20 right-[10%] h-[500px] w-[500px] rounded-full bg-brand-blue/20 blur-[100px] animate-pulse"
         />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-[30%] -left-20 h-[400px] w-[400px] rounded-full bg-brand-teal/15 blur-[100px]"
-          style={{ animationDelay: "2s" }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-20 left-[30%] h-[350px] w-[350px] rounded-full bg-brand-amber/15 blur-[100px]"
-          style={{ animationDelay: "1s" }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-[10%] right-[30%] h-[250px] w-[250px] rounded-full bg-brand-coral/10 blur-[80px]"
-          style={{ animationDelay: "3s" }}
-        />
 
         <div className="relative mx-auto w-full max-w-7xl px-6 py-20 sm:py-32">
-          <div className="grid items-start gap-10 lg:grid-cols-5 lg:gap-12">
+          <div className="grid items-center gap-12 lg:grid-cols-5 lg:gap-16">
             {/* Left: Text + CTA — 3 cols */}
             <div className="lg:col-span-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/30 dark:border-brand-blue/40 bg-brand-blue-surface/95 dark:bg-brand-blue/10 px-4 py-1.5 text-caption font-semibold uppercase tracking-widest text-brand-blue-deep dark:text-brand-blue-bright backdrop-blur-sm">
@@ -53,36 +39,34 @@ export default async function HomePage() {
                 Open to opportunities
               </span>
 
-              <h1 className="mt-5 sm:mt-6 text-[2.25rem] sm:text-[3rem] lg:text-display font-bold leading-[1.15] sm:leading-display tracking-tight text-neutral-900 dark:text-neutral-50">
-                Full-stack engineer building{" "}
-                <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-amber bg-clip-text text-transparent">production-grade</span>{" "}
-                digital products.
+              <h1 className="mt-5 sm:mt-6 flex flex-col text-[2.5rem] sm:text-[3.25rem] lg:text-display font-bold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50">
+                <span>Engineer.</span>
+                <span>Creator.</span>
+                <span>Problem solver.</span>
               </h1>
 
-              <p className="mt-4 sm:mt-5 max-w-lg text-body sm:text-body-lg leading-body text-neutral-600 dark:text-neutral-400">
-                I design and engineer performant web applications, APIs, and
-                business systems. {PERSONA.yearsOfExperience} years of hands-on
-                experience across the modern JavaScript ecosystem — Next.js,
-                React, NestJS &amp; Tailwind CSS.
+              <p className="mt-5 sm:mt-6 max-w-lg text-body sm:text-body-lg leading-body text-neutral-600 dark:text-neutral-400">
+                A blend of technical precision, creative thinking, and a
+                relentless drive to build things that matter.
               </p>
 
               <div className="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
                 <Link
                   href="/projects"
-                  className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200 px-6 py-3 text-body font-semibold text-white shadow-lg transition-all hover:bg-neutral-800 hover:shadow-xl"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-neutral-900 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200 px-6 py-3 text-body font-semibold text-white shadow-lg transition-all hover:bg-neutral-800 hover:shadow-xl"
                 >
                   See my work
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-6 py-3 text-body font-semibold text-neutral-700 dark:text-neutral-300 transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-6 py-3 text-body font-semibold text-neutral-700 dark:text-neutral-300 transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-800"
                 >
                   About me
                 </Link>
                 <a
                   href="#"
-                  className="inline-flex items-center gap-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-6 py-3 text-body font-semibold text-neutral-500 dark:text-neutral-400 transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-6 py-3 text-body font-semibold text-neutral-500 dark:text-neutral-400 transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-800"
                 >
                   <Download className="h-4 w-4" />
                   CV
@@ -108,51 +92,26 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right: Terminal + Personality Card — 2 cols */}
-            <div className="lg:col-span-2 flex flex-col items-center lg:items-end gap-6">
-              {/* Terminal UI — hidden on mobile, visible on sm+ */}
-              <TerminalUI className="hidden sm:block" />
-
-              {/* Personality card */}
-              <div className="relative w-full max-w-[340px]">
-                {/* Chrome glow ring */}
-                <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-brand-blue/30 via-brand-teal/25 to-brand-amber/20 dark:from-brand-blue/15 dark:via-brand-teal/12 dark:to-brand-amber/10 blur-xl animate-pulse" />
-                <div className="absolute -inset-3 rounded-[1.75rem] bg-gradient-to-br from-brand-blue/15 via-brand-coral/10 to-brand-teal/15 dark:from-brand-blue/8 dark:via-brand-coral/5 dark:to-brand-teal/8 blur-md" />
-                <div className="relative rounded-[1.25rem] border border-white/60 dark:border-neutral-700/60 bg-white/90 dark:bg-neutral-900/90 p-3 shadow-2xl backdrop-blur-sm">
-                  <div className="aspect-[3/4] w-full overflow-hidden rounded-xl bg-gradient-to-br from-brand-blue-surface via-brand-teal-surface to-brand-amber-surface dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-amber/10">
-                    <div className="flex h-full items-center justify-center">
-                      <div className="text-center p-8">
-                        <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue via-brand-teal to-brand-amber text-3xl font-bold text-white shadow-lg ring-4 ring-white dark:ring-neutral-800 overflow-hidden">
-                          {about?.photoUrl ? (
-                            <img
-                              src={about.photoUrl}
-                              alt={PERSONA.name}
-                              className="h-full w-full object-cover"
-                            />
-                          ) : (
-                            PERSONA.name.split(" ").map((n) => n[0]).join("")
-                          )}
-                        </div>
-                        <h2 className="text-h4 font-bold text-neutral-900 dark:text-neutral-100">
-                          {PERSONA.name}
-                        </h2>
-                        <p className="mt-1 text-body-sm text-neutral-500 dark:text-neutral-400">
-                          {PERSONA.title}
-                        </p>
-                        <div className="mt-4 flex flex-wrap justify-center gap-2">
-                          {["Developer", "Technician", "Designer", "Marketer"].map(
-                            (role) => (
-                              <span
-                                key={role}
-                                className="rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-3 py-1 text-caption font-medium text-neutral-600 dark:text-neutral-400 shadow-sm"
-                              >
-                                {role}
-                              </span>
-                            ),
-                          )}
-                        </div>
-                      </div>
-                    </div>
+            {/* Right: Photo — first-class, asymmetric — 2 cols */}
+            <div className="lg:col-span-2 flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-[360px]">
+                <div className="absolute -inset-4 rounded-3xl bg-brand-blue/15 dark:bg-brand-blue/10 blur-2xl" />
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/60 dark:border-neutral-700/60 shadow-2xl">
+                  <Image
+                    src={about?.photoUrl || "/photos/hero-main.webp"}
+                    alt={PERSONA.name}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 360px, (min-width: 640px) 60vw, 90vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/10 to-transparent p-5 pt-14">
+                    <p className="text-body-sm font-semibold text-white">
+                      {PERSONA.name}
+                    </p>
+                    <p className="text-caption text-neutral-300">
+                      {PERSONA.title}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -165,6 +124,30 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── How I Build ──────────────────────────────────── */}
+      <section className="bg-neutral-950 py-20 sm:py-28">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <Reveal>
+              <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-blue-bright">
+                How I build
+              </p>
+              <h2 className="mt-3 text-h2 font-bold tracking-tight text-white">
+                Discipline, not luck.
+              </h2>
+              <p className="mt-4 text-body leading-body text-neutral-400">
+                Every project starts with the same standard: clarity on
+                requirements, security by default, and ownership from first
+                commit to production. No shortcuts that come back later.
+              </p>
+            </Reveal>
+            <Reveal delay={0.1} className="flex justify-center lg:justify-end">
+              <TerminalUI />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* ── Featured Projects ─────────────────────────────── */}
       {featured.length > 0 && (
         <section className="bg-white dark:bg-neutral-900 py-20 sm:py-28">
@@ -174,7 +157,7 @@ export default async function HomePage() {
                 Featured work
               </p>
               <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-                Selected <span className="text-gradient-blue">projects</span>
+                Selected <span className="text-brand-blue dark:text-brand-blue-bright">projects</span>
               </h2>
             </Reveal>
 
@@ -182,13 +165,14 @@ export default async function HomePage() {
               {featured.map((project, i) => (
                 <Reveal key={project.id} delay={i * 0.08}>
                   <div className="group overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
-                    <div className="aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-700">
+                    <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-700">
                       {project.imageUrl ? (
-                        <img
+                        <Image
                           src={project.imageUrl}
                           alt={project.name}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading="lazy"
+                          fill
+                          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       ) : (
                         <div className="flex h-full items-center justify-center text-neutral-300 dark:text-neutral-600">
@@ -244,7 +228,7 @@ export default async function HomePage() {
                 skill.icon === "Braces" ? Braces :
                   skill.icon === "Terminal" ? Terminal :
                     skill.icon === "Palette" ? Palette :
-                      GitBranch;
+                      Brain;
               return (
                 <Reveal key={skill.name} delay={i * 0.06}>
                   <div className="group rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
@@ -283,7 +267,7 @@ export default async function HomePage() {
               </p>
               <h2 className="mt-3 text-h2 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
                 Partnering to{" "}
-                <span className="text-gradient-warm">build</span>
+                <span className="text-brand-blue dark:text-brand-blue-bright">build</span>
               </h2>
             </Reveal>
 
@@ -292,9 +276,9 @@ export default async function HomePage() {
                 <Reveal key={collab.id} delay={i * 0.08}>
                   <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-700">
+                      <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-700">
                         {collab.partnerLogoUrl ? (
-                          <img src={collab.partnerLogoUrl} alt={collab.partnerName} className="h-6 w-6 object-contain" />
+                          <Image src={collab.partnerLogoUrl} alt={collab.partnerName} fill sizes="40px" className="object-contain p-2" />
                         ) : (
                           <Building2 className="h-5 w-5 text-neutral-300 dark:text-neutral-600" />
                         )}
@@ -338,7 +322,7 @@ export default async function HomePage() {
         <div className="relative mx-auto max-w-2xl px-6 text-center">
           <h2 className="text-h2 font-bold text-white">
             Let&apos;s build something{" "}
-            <span className="text-gradient-warm">great</span> together.
+            <span className="text-brand-blue-bright">great</span> together.
           </h2>
           <p className="mt-4 text-body-lg leading-body text-neutral-400">
             I&apos;m currently open to freelance projects and full-time

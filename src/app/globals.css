@@ -70,13 +70,15 @@
   --leading-body: 1.7;
   --leading-tight: 1.15;
 
+  /* Structural surfaces (cards, containers) stay closer to --radius-lg/xl;
+     interactive surfaces (buttons, pills, photo frames) reach for --radius-2xl/3xl. */
   --radius-xs: 0.25rem;
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
-  --radius-lg: 0.625rem;
-  --radius-xl: 0.625rem;
-  --radius-2xl: 0.625rem;
-  --radius-3xl: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.375rem;
+  --radius-3xl: 2rem;
 
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -141,74 +143,18 @@ html.dark .glass {
   border: 1px solid rgb(255 255 255 / 0.08);
 }
 
-/* ---- Gradient Text ---- */
-.text-gradient-blue {
-  background: linear-gradient(135deg, var(--color-brand-blue-bright), var(--color-brand-teal-bright));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-html.dark .text-gradient-blue {
-  background: linear-gradient(135deg, #60a5fa, #2dd4bf);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-warm {
-  background: linear-gradient(135deg, var(--color-brand-amber-bright), var(--color-brand-coral-bright));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-html.dark .text-gradient-warm {
-  background: linear-gradient(135deg, #fbbf24, #fb7185);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-full {
-  background: linear-gradient(135deg, var(--color-brand-blue-bright), var(--color-brand-teal-bright), var(--color-brand-amber-bright));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-html.dark .text-gradient-full {
-  background: linear-gradient(135deg, #60a5fa, #2dd4bf, #fbbf24);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ---- Animated Gradient Background ---- */
+/* ---- Animated Gradient Background ----
+   Ink/paper + one signature accent (blue) only — no multi-hue cycling. */
 .bg-animated-gradient {
-  background: linear-gradient(
-    135deg,
-    #eff6ff 0%,
-    #f0fdfa 25%,
-    #fffbeb 50%,
-    #fff1f2 75%,
-    #eff6ff 100%
-  );
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+  background: linear-gradient(135deg, #fafafa 0%, #eff6ff 50%, #fafafa 100%);
+  background-size: 300% 300%;
+  animation: gradientShift 18s ease infinite;
 }
 
 html.dark .bg-animated-gradient {
-  background: linear-gradient(
-    135deg,
-    #0f172a 0%,
-    #0d1b1f 25%,
-    #1a1208 50%,
-    #1a0a0c 75%,
-    #0f172a 100%
-  );
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+  background: linear-gradient(135deg, #0a0a0a 0%, #0f172a 50%, #0a0a0a 100%);
+  background-size: 300% 300%;
+  animation: gradientShift 18s ease infinite;
 }
 
 /* ---- Hero Chrome ---- */
