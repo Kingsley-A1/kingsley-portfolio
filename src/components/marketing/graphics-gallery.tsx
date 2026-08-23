@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { X, ZoomIn } from "lucide-react";
 import type { GraphicsWork } from "@/features/admin/graphics-repository";
 import { Reveal } from "@/components/marketing/reveal";
@@ -29,12 +30,13 @@ export function GraphicsGallery({ items }: { items: GraphicsWork[] }) {
               className="group relative mb-6 cursor-pointer overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm transition-all hover:shadow-xl"
               onClick={() => setLightbox(item)}
             >
-              <div className="overflow-hidden">
-                <img
+              <div className="relative aspect-4/5 overflow-hidden">
+                <Image
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
@@ -88,10 +90,13 @@ export function GraphicsGallery({ items }: { items: GraphicsWork[] }) {
             className="relative max-h-[85vh] max-w-5xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
+            <Image
               src={lightbox.imageUrl}
               alt={lightbox.title}
-              className="max-h-[85vh] rounded-2xl object-contain shadow-2xl"
+              width={1200}
+              height={1500}
+              sizes="90vw"
+              className="max-h-[85vh] w-auto rounded-2xl object-contain shadow-2xl"
             />
             <div className="absolute bottom-0 inset-x-0 rounded-b-2xl bg-gradient-to-t from-neutral-900/90 to-transparent p-6 pt-16">
               <h3 className="text-h5 font-bold text-white">{lightbox.title}</h3>

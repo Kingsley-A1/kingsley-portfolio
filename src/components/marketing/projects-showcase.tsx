@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import { ExternalLink, Clock, Monitor, Smartphone, MonitorSmartphone, Globe } from "lucide-react";
 import type { PortfolioProjectItem } from "@/features/admin/projects-repository";
 import { Reveal } from "@/components/marketing/reveal";
@@ -71,11 +72,12 @@ export function ProjectsShowcase({
                 {/* Image */}
                 <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
                   {project.imageUrl ? (
-                    <img
+                    <Image
                       src={project.imageUrl}
                       alt={project.name}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center">
