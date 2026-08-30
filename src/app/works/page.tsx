@@ -16,6 +16,12 @@ export const metadata: Metadata = {
     description: `Career journey across ${PERSONA.yearsOfExperience} years in software engineering and technology.`,
     images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `Work Experience — ${PERSONA.name}`,
+    description: `Career journey across ${PERSONA.yearsOfExperience} years in software engineering and technology.`,
+    images: [`${SITE_URL}/opengraph-image`],
+  },
 };
 
 export default async function WorksPage() {

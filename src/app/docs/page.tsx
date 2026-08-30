@@ -6,11 +6,18 @@ import { PERSONA, SITE_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Documentation",
   description: `Versioned release notes, changelog, and technical documentation for ${PERSONA.name}'s portfolio.`,
-  alternates: { canonical: "/docs" },
+  alternates: { canonical: null },
+  robots: { index: false, follow: false },
   openGraph: {
     title: `Docs — ${PERSONA.name}`,
     description: "Release notes, technical specifications, and version history.",
     images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Docs — ${PERSONA.name}`,
+    description: "Release notes, technical specifications, and version history.",
+    images: [`${SITE_URL}/opengraph-image`],
   },
 };
 

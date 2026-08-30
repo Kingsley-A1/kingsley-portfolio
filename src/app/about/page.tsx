@@ -17,6 +17,12 @@ export const metadata: Metadata = {
     description: `Full-stack engineer with ${PERSONA.yearsOfExperience} years of experience building elegant digital experiences.`,
     images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `About — ${PERSONA.name}`,
+    description: `Full-stack engineer with ${PERSONA.yearsOfExperience} years of experience building elegant digital experiences.`,
+    images: [`${SITE_URL}/opengraph-image`],
+  },
 };
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {

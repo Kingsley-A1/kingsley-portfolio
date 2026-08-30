@@ -16,6 +16,12 @@ export const metadata: Metadata = {
     description: "From government portals to fashion platforms — explore the portfolio of engineering excellence.",
     images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `Projects — ${PERSONA.name}`,
+    description: "From government portals to fashion platforms — explore the portfolio of engineering excellence.",
+    images: [`${SITE_URL}/opengraph-image`],
+  },
 };
 
 export default async function ProjectsPage() {

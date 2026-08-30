@@ -15,7 +15,7 @@ export const PERSONA = {
 } as const;
 
 export const SITE_NAME = PERSONA.name;
-export const SITE_DOMAIN = "kingsley.dev";
+export const SITE_DOMAIN = "kingsley.bespoketech.com.ng";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || `https://${SITE_DOMAIN}`;
 export const SITE_DESCRIPTION =

@@ -113,7 +113,7 @@
 - [x] Review `/`, `/about`, `/projects`, `/graphics`, `/collaborations`, `/works`, `/docs`, and `/contact` for readable backgrounds, text, borders, focus states, and native controls in both modes.
 - [ ] Run `pnpm lint && pnpm typecheck && pnpm build`.
 - [x] Browser proof: cleared storage + dark OS gives light; toggle gives dark; reload preserves dark; toggling back persists light.
-- [ ] Commit: `fix(theme): restore explicit light and dark modes`
+- [x] Commit: `fix(theme): restore explicit light and dark modes`
 
 ---
 
@@ -131,13 +131,13 @@
 - Create: `scripts/verify-seo.mjs`
 - Modify: `package.json`
 
-- [ ] Add `noindex, nofollow, noarchive` metadata and no inherited homepage canonical to `/admin/*`.
-- [ ] Add explicit `noindex, nofollow` metadata to `/businessos` and `/docs`, matching their sitemap exclusion.
-- [ ] Remove synthetic `new Date()` sitemap timestamps; omit `lastModified` until a truthful source exists.
-- [ ] Add page-specific Twitter titles/descriptions/images wherever page-specific Open Graph metadata already exists.
-- [ ] Add `pnpm seo:check` to build and assert robots/canonicals for home, projects, admin login, docs, and businessOS generated HTML.
+- [x] Add `noindex, nofollow, noarchive` metadata and no inherited homepage canonical to `/admin/*`.
+- [x] Add explicit `noindex, nofollow` metadata to `/businessos` and `/docs`, matching their sitemap exclusion.
+- [x] Remove synthetic `new Date()` sitemap timestamps; omit `lastModified` until a truthful source exists.
+- [x] Add page-specific Twitter titles/descriptions/images wherever page-specific Open Graph metadata already exists.
+- [x] Add `pnpm seo:check` to build and assert robots/canonicals for home, projects, admin login, docs, and businessOS generated HTML.
 - [ ] Run `pnpm seo:check && pnpm lint && pnpm typecheck`.
-- [ ] Inspect generated `robots.txt`, `sitemap.xml`, canonical tags, robots tags, and social tags locally.
+- [x] Inspect generated `robots.txt`, `sitemap.xml`, canonical tags, robots tags, and social tags locally.
 - [ ] Commit: `fix(seo): align metadata and indexability`
 
 **Not proved here:** Search Console ownership, deployed metadata, crawling, and live indexing.

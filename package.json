@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
+    "seo:check": "node scripts/verify-seo.mjs",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs"
