@@ -1,8 +1,13 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-
-type Theme = "light" | "dark";
+import { usePathname } from "next/navigation";
+import {
+  DARK_THEME_COLOR,
+  LIGHT_THEME_COLOR,
+  normalizeTheme,
+  type Theme,
+} from "@/lib/theme-preference";
 
 interface ThemeContextValue {
   theme: Theme;
@@ -21,32 +26,32 @@ export function useTheme() {
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  const adminRoute = pathname.startsWith("/admin");
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem("theme") as Theme | null;
-    if (stored) {
-      setTheme(stored);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-    }
+    setTheme(normalizeTheme(localStorage.getItem("theme")));
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
     const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
+    const appliedTheme = adminRoute ? "light" : theme;
+    root.classList.toggle("dark", appliedTheme === "dark");
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute(
+        "content",
+        appliedTheme === "dark" ? DARK_THEME_COLOR : LIGHT_THEME_COLOR,
+      );
     localStorage.setItem("theme", theme);
-  }, [theme, mounted]);
+  }, [adminRoute, theme, mounted]);
 
   const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
   return (
-    <ThemeContext.Provider value={{ theme, toggle }}>
+    <ThemeContext.Provider value={{ theme: adminRoute ? "light" : theme, toggle }}>
       {children}
     </ThemeContext.Provider>
   );

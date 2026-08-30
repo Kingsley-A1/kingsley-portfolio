@@ -86,8 +86,8 @@
 - [x] Document variable names/placeholders only in both `.env.example` files; do not configure live secrets.
 - [ ] Run tests, lint, typecheck, and build in both repositories.
 - [x] Verify locally with synthetic signed requests only; do not mutate a configured database.
-- [ ] Commit Kingsley: `feat(portfolio): sync Bespoke-owned projects`
-- [ ] Commit Bespoke: `feat(portfolio): notify Kingsley project refresh`
+- [x] Commit Kingsley: `feat(portfolio): sync Bespoke-owned projects`
+- [x] Commit Bespoke: `feat(portfolio): notify Kingsley project refresh`
 
 **Gate:** Kingsley contains no project mutation endpoint or destructive control. Live cross-app delivery remains unverified until both deployments receive matching secrets and URLs.
 
@@ -105,14 +105,14 @@
 - Modify: `src/components/layout/theme-toggle.tsx`
 - Modify: public page/components containing `dark:` utilities as revealed by route review
 
-- [ ] Add `@custom-variant dark (&:where(.dark, .dark *));` immediately after the Tailwind import.
-- [ ] Make the pre-hydration script apply `.dark` only when `localStorage.theme === "dark"`; absence or invalid values stay light.
-- [ ] Make `ThemeProvider` validate stored values and remove OS-preference fallback.
-- [ ] Add `color-scheme: light` and `html.dark { color-scheme: dark; }`; set matching light/dark theme colours in metadata.
-- [ ] Keep `/businessos` intentionally dark and keep admin light-only in this slice.
-- [ ] Review `/`, `/about`, `/projects`, `/graphics`, `/collaborations`, `/works`, `/docs`, and `/contact` for readable backgrounds, text, borders, focus states, and native controls in both modes.
+- [x] Add `@custom-variant dark (&:where(.dark, .dark *));` immediately after the Tailwind import.
+- [x] Make the pre-hydration script apply `.dark` only when `localStorage.theme === "dark"`; absence or invalid values stay light.
+- [x] Make `ThemeProvider` validate stored values and remove OS-preference fallback.
+- [x] Add `color-scheme: light` and `html.dark { color-scheme: dark; }`; set matching light/dark theme colours in metadata.
+- [x] Keep `/businessos` intentionally dark and keep admin light-only in this slice.
+- [x] Review `/`, `/about`, `/projects`, `/graphics`, `/collaborations`, `/works`, `/docs`, and `/contact` for readable backgrounds, text, borders, focus states, and native controls in both modes.
 - [ ] Run `pnpm lint && pnpm typecheck && pnpm build`.
-- [ ] Browser proof: cleared storage + dark OS gives light; toggle gives dark; reload preserves dark; toggling back persists light.
+- [x] Browser proof: cleared storage + dark OS gives light; toggle gives dark; reload preserves dark; toggling back persists light.
 - [ ] Commit: `fix(theme): restore explicit light and dark modes`
 
 ---

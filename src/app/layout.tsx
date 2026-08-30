@@ -7,6 +7,10 @@ import {
 } from "@/lib/constants";
 import { PublicShell } from "@/components/layout/public-shell";
 import { ThemeProvider } from "@/components/layout/theme-provider";
+import {
+  LIGHT_THEME_COLOR,
+  THEME_BOOTSTRAP_SCRIPT,
+} from "@/lib/theme-preference";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -92,6 +96,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
+        <meta name="theme-color" content={LIGHT_THEME_COLOR} />
         {/* Preconnect to external origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -130,16 +135,7 @@ export default function RootLayout({
         {/* Inline theme script to prevent flash. Static string only — never interpolate user input here, it runs unsandboxed before hydration. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme');
-                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                  }
-                } catch(e) {}
-              })();
-            `,
+            __html: THEME_BOOTSTRAP_SCRIPT,
           }}
         />
       </head>
