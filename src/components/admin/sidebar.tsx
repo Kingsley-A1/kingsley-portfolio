@@ -9,6 +9,7 @@ import {
   Palette,
   Handshake,
   Briefcase,
+  ExternalLink,
   LogOut,
   Menu,
   X,
@@ -52,6 +53,19 @@ const NAV_ITEMS = [
 export function AdminSidebar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  async function handleLogout() {
+    if (loggingOut) return;
+    setLoggingOut(true);
+    try {
+      const response = await fetch("/admin/api/logout", { method: "POST" });
+      if (!response.ok) throw new Error("Logout failed");
+      window.location.assign("/admin/login");
+    } catch {
+      setLoggingOut(false);
+    }
+  }
 
   function NavItems() {
     return (
@@ -124,14 +138,23 @@ export function AdminSidebar() {
 
         <NavItems />
 
-        <div className="absolute bottom-4 left-4 right-4">
+        <div className="absolute bottom-4 left-4 right-4 space-y-1">
           <Link
             href="/"
             className="flex items-center gap-2 rounded-xl px-3 py-2 text-body-sm text-neutral-400 transition-colors hover:bg-neutral-100 hover:text-neutral-600"
           >
-            <LogOut className="h-4 w-4" />
-            Back to site
+            <ExternalLink className="h-4 w-4" />
+            View site
           </Link>
+          <button
+            type="button"
+            onClick={handleLogout}
+            disabled={loggingOut}
+            className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-body-sm text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 disabled:opacity-50"
+          >
+            <LogOut className="h-4 w-4" />
+            {loggingOut ? "Logging out…" : "Log out"}
+          </button>
         </div>
       </aside>
     </>
