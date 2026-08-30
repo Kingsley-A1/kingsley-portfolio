@@ -1,5 +1,6 @@
 import { listExperience } from "@/features/admin/experience-repository";
 import { AdminExperienceList } from "@/components/admin/experience-list";
+import Link from "next/link";
 
 export default async function AdminExperiencePage() {
   const items = await listExperience();
@@ -15,12 +16,12 @@ export default async function AdminExperiencePage() {
             {items.length} roles in your career timeline.
           </p>
         </div>
-        <a
+        <Link
           href="/admin/experience/new"
           className="rounded-xl bg-neutral-900 px-5 py-2.5 text-body-sm font-semibold text-white transition-all hover:bg-neutral-800"
         >
           + Add Role
-        </a>
+        </Link>
       </div>
 
       <AdminExperienceList items={items} />

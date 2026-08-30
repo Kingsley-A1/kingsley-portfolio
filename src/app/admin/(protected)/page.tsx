@@ -86,8 +86,8 @@ export default function AdminDashboard() {
           Quick tip
         </h2>
         <p className="text-body-sm text-neutral-500">
-          All content changes are reflected immediately on your public portfolio.
-          Use the sidebar to navigate between sections. Changes auto-save.
+          Use each editor&apos;s save or publish action when your changes are ready.
+          Successful saves refresh the relevant public portfolio page.
         </p>
       </div>
     </div>

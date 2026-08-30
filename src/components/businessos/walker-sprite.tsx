@@ -17,8 +17,6 @@ export function WalkerSprite({
   direction?: "left" | "right";
 }) {
   const c = COLORS[id % COLORS.length];
-  const s = size / 48;
-
   return (
     <svg
       width={size}

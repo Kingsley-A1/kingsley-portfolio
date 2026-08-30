@@ -1,6 +1,10 @@
 import "server-only";
 
 import { query } from "@/lib/db";
+import type {
+  ExperienceCreateInput,
+  ExperienceUpdateInput,
+} from "@/features/admin/admin-schemas";
 
 export interface WorkExperience {
   id: string;
@@ -93,19 +97,9 @@ export async function getExperience(id: string) {
   return result.rows[0] ? mapExperience(result.rows[0]) : null;
 }
 
-export async function createExperience(input: {
-  company: string;
-  role: string;
-  description: string;
-  startDate: string;
-  endDate?: string;
-  isCurrent?: boolean;
-  companyLogoUrl?: string;
-  companyLogoKey?: string;
-  skillsUsed?: string[];
-  published?: boolean;
-  sortOrder?: number;
-}): Promise<WorkExperience> {
+export async function createExperience(
+  input: ExperienceCreateInput,
+): Promise<WorkExperience> {
   const result = await query<ExperienceRow>(
     `INSERT INTO work_experience (company, role, description, start_date, end_date, is_current, company_logo_url, company_logo_key, skills_used, published, sort_order)
      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9::JSONB, $10, $11) RETURNING *`,
@@ -126,29 +120,32 @@ export async function createExperience(input: {
   return mapExperience(result.rows[0]);
 }
 
+const EXPERIENCE_COLUMNS: Record<keyof ExperienceUpdateInput, string> = {
+  company: "company",
+  role: "role",
+  description: "description",
+  startDate: "start_date",
+  endDate: "end_date",
+  isCurrent: "is_current",
+  companyLogoUrl: "company_logo_url",
+  companyLogoKey: "company_logo_key",
+  skillsUsed: "skills_used",
+  published: "published",
+  sortOrder: "sort_order",
+};
+
 export async function updateExperience(
   id: string,
-  input: Partial<{
-    company: string;
-    role: string;
-    description: string;
-    startDate: string;
-    endDate: string | null;
-    isCurrent: boolean;
-    companyLogoUrl: string | null;
-    companyLogoKey: string | null;
-    skillsUsed: string[];
-    published: boolean;
-    sortOrder: number;
-  }>,
-): Promise<WorkExperience> {
+  input: ExperienceUpdateInput,
+): Promise<WorkExperience | null> {
   const sets: string[] = [];
   const values: unknown[] = [];
   let idx = 1;
 
   for (const [key, value] of Object.entries(input)) {
     if (value === undefined) continue;
-    const col = key.replace(/[A-Z]/g, (m) => `_${m.toLowerCase()}`);
+    const col = EXPERIENCE_COLUMNS[key as keyof ExperienceUpdateInput];
+    if (!col) continue;
     if (key === "skillsUsed") {
       sets.push(`${col} = $${idx}::JSONB`);
       values.push(JSON.stringify(value));
@@ -165,9 +162,10 @@ export async function updateExperience(
     `UPDATE work_experience SET ${sets.join(", ")} WHERE id = $${idx} RETURNING *`,
     values,
   );
-  return mapExperience(result.rows[0]);
+  return result.rows[0] ? mapExperience(result.rows[0]) : null;
 }
 
-export async function deleteExperience(id: string): Promise<void> {
-  await query("DELETE FROM work_experience WHERE id = $1", [id]);
+export async function deleteExperience(id: string): Promise<boolean> {
+  const result = await query("DELETE FROM work_experience WHERE id = $1", [id]);
+  return (result.rowCount ?? 0) > 0;
 }

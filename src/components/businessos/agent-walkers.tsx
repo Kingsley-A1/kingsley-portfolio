@@ -26,7 +26,7 @@ function pick<T>(arr: readonly T[]): T {
 
 export function AgentWalkers() {
   const [dismissed, setDismissed] = useState(false);
-  const [renderTick, setRenderTick] = useState(0); // triggers re-render for bubbles
+  const [, setRenderTick] = useState(0); // triggers re-render for bubbles
   const walkersRef = useRef<Walker[]>([]);
   const elRefs = useRef<Map<number, HTMLDivElement>>(new Map());
   const rafRef = useRef<number>(0);

@@ -1,6 +1,10 @@
 import "server-only";
 
 import { query } from "@/lib/db";
+import type {
+  CollaborationCreateInput,
+  CollaborationUpdateInput,
+} from "@/features/admin/admin-schemas";
 
 export interface Collaboration {
   id: string;
@@ -79,18 +83,9 @@ export async function getCollaboration(id: string) {
   return result.rows[0] ? mapCollab(result.rows[0]) : null;
 }
 
-export async function createCollaboration(input: {
-  partnerName: string;
-  partnerLogoUrl?: string;
-  partnerLogoKey?: string;
-  projectName: string;
-  description: string;
-  role: string;
-  year: string;
-  link?: string;
-  published?: boolean;
-  sortOrder?: number;
-}): Promise<Collaboration> {
+export async function createCollaboration(
+  input: CollaborationCreateInput,
+): Promise<Collaboration> {
   const result = await query<CollabRow>(
     `INSERT INTO collaborations (partner_name, partner_logo_url, partner_logo_key, project_name, description, role, year, link, published, sort_order)
      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
@@ -110,28 +105,31 @@ export async function createCollaboration(input: {
   return mapCollab(result.rows[0]);
 }
 
+const COLLABORATION_COLUMNS: Record<keyof CollaborationUpdateInput, string> = {
+  partnerName: "partner_name",
+  partnerLogoUrl: "partner_logo_url",
+  partnerLogoKey: "partner_logo_key",
+  projectName: "project_name",
+  description: "description",
+  role: "role",
+  year: "year",
+  link: "link",
+  published: "published",
+  sortOrder: "sort_order",
+};
+
 export async function updateCollaboration(
   id: string,
-  input: Partial<{
-    partnerName: string;
-    partnerLogoUrl: string | null;
-    partnerLogoKey: string | null;
-    projectName: string;
-    description: string;
-    role: string;
-    year: string;
-    link: string | null;
-    published: boolean;
-    sortOrder: number;
-  }>,
-): Promise<Collaboration> {
+  input: CollaborationUpdateInput,
+): Promise<Collaboration | null> {
   const sets: string[] = [];
   const values: unknown[] = [];
   let idx = 1;
 
   for (const [key, value] of Object.entries(input)) {
     if (value === undefined) continue;
-    const col = key.replace(/[A-Z]/g, (m) => `_${m.toLowerCase()}`);
+    const col = COLLABORATION_COLUMNS[key as keyof CollaborationUpdateInput];
+    if (!col) continue;
     sets.push(`${col} = $${idx}`);
     values.push(value);
     idx++;
@@ -143,9 +141,10 @@ export async function updateCollaboration(
     `UPDATE collaborations SET ${sets.join(", ")} WHERE id = $${idx} RETURNING *`,
     values,
   );
-  return mapCollab(result.rows[0]);
+  return result.rows[0] ? mapCollab(result.rows[0]) : null;
 }
 
-export async function deleteCollaboration(id: string): Promise<void> {
-  await query("DELETE FROM collaborations WHERE id = $1", [id]);
+export async function deleteCollaboration(id: string): Promise<boolean> {
+  const result = await query("DELETE FROM collaborations WHERE id = $1", [id]);
+  return (result.rowCount ?? 0) > 0;
 }

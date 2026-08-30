@@ -15,6 +15,7 @@ export function AdminProjectsList({
         >
           <div className="h-20 w-28 flex-shrink-0 overflow-hidden rounded-lg bg-neutral-100">
             {project.imageUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element -- The read-only admin previews images from the separately deployed Bespoke site.
               <img
                 src={project.imageUrl}
                 alt={project.name}

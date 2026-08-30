@@ -36,6 +36,7 @@ export function AboutEditor({ initial }: { initial: AboutContent | null }) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     headline: initial?.headline ?? "",
     bio: initial?.bio ?? "",
@@ -57,17 +58,23 @@ export function AboutEditor({ initial }: { initial: AboutContent | null }) {
   async function handleSave() {
     setSaving(true);
     setSaved(false);
+    setError("");
     try {
       const res = await fetch("/admin/api/about", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (res.ok) {
-        setSaved(true);
-        setTimeout(() => setSaved(false), 2000);
-        router.refresh();
+      if (!res.ok) {
+        const payload = await res.json().catch(() => null);
+        setError(payload?.error ?? "The changes could not be saved.");
+        return;
       }
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+      router.refresh();
+    } catch {
+      setError("The changes could not be saved. Check your connection and try again.");
     } finally {
       setSaving(false);
     }
@@ -200,6 +207,7 @@ export function AboutEditor({ initial }: { initial: AboutContent | null }) {
             ✓ Saved successfully
           </span>
         )}
+        {error && <p role="alert" className="text-body-sm text-red-600">{error}</p>}
       </div>
     </div>
   );

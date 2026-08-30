@@ -84,7 +84,7 @@
 - [x] Write failing Bespoke tests for request signing and disabled/misconfigured notification behavior.
 - [x] Notify Kingsley after successful Bespoke project create/update/delete without rolling back the authoritative Bespoke mutation if the secondary refresh fails.
 - [x] Document variable names/placeholders only in both `.env.example` files; do not configure live secrets.
-- [ ] Run tests, lint, typecheck, and build in both repositories.
+- [x] Run tests, lint, typecheck, and build in both repositories.
 - [x] Verify locally with synthetic signed requests only; do not mutate a configured database.
 - [x] Commit Kingsley: `feat(portfolio): sync Bespoke-owned projects`
 - [x] Commit Bespoke: `feat(portfolio): notify Kingsley project refresh`
@@ -111,7 +111,7 @@
 - [x] Add `color-scheme: light` and `html.dark { color-scheme: dark; }`; set matching light/dark theme colours in metadata.
 - [x] Keep `/businessos` intentionally dark and keep admin light-only in this slice.
 - [x] Review `/`, `/about`, `/projects`, `/graphics`, `/collaborations`, `/works`, `/docs`, and `/contact` for readable backgrounds, text, borders, focus states, and native controls in both modes.
-- [ ] Run `pnpm lint && pnpm typecheck && pnpm build`.
+- [x] Run `pnpm lint && pnpm typecheck && pnpm build`.
 - [x] Browser proof: cleared storage + dark OS gives light; toggle gives dark; reload preserves dark; toggling back persists light.
 - [x] Commit: `fix(theme): restore explicit light and dark modes`
 
@@ -136,9 +136,9 @@
 - [x] Remove synthetic `new Date()` sitemap timestamps; omit `lastModified` until a truthful source exists.
 - [x] Add page-specific Twitter titles/descriptions/images wherever page-specific Open Graph metadata already exists.
 - [x] Add `pnpm seo:check` to build and assert robots/canonicals for home, projects, admin login, docs, and businessOS generated HTML.
-- [ ] Run `pnpm seo:check && pnpm lint && pnpm typecheck`.
+- [x] Run `pnpm seo:check && pnpm lint && pnpm typecheck`.
 - [x] Inspect generated `robots.txt`, `sitemap.xml`, canonical tags, robots tags, and social tags locally.
-- [ ] Commit: `fix(seo): align metadata and indexability`
+- [x] Commit: `fix(seo): align metadata and indexability`
 
 **Not proved here:** Search Console ownership, deployed metadata, crawling, and live indexing.
 
@@ -157,22 +157,22 @@
 - Modify: `src/app/admin/(protected)/page.tsx`
 - Modify: `eslint.config.mjs`
 
-- [ ] Add Zod schemas for about, graphics, collaboration, and experience create/update payloads.
-- [ ] Replace request-key-derived SQL columns with per-repository allowlists.
-- [ ] Return truthful `400`, `404`, and `500` responses without secret-bearing errors.
-- [ ] Show inline save/delete failures; redirect or refresh only after `res.ok`.
-- [ ] Revalidate affected public routes after successful mutations: `/` plus `/about`, `/graphics`, `/collaborations`, or `/works` as applicable.
-- [ ] Replace the false “auto-save/immediate” dashboard copy with accurate save-and-publish behaviour.
-- [ ] Replace `FlatCompat` with the native Next.js flat ESLint exports so lint starts without undeclared packages.
-- [ ] Run `pnpm test && pnpm lint && pnpm typecheck && pnpm build`.
-- [ ] Exercise one successful and one rejected mutation for every editor against a non-production database; restore changed values.
-- [ ] Commit: `fix(admin): validate writes and surface persistence state`
+- [x] Add Zod schemas for about, graphics, collaboration, and experience create/update payloads.
+- [x] Replace request-key-derived SQL columns with per-repository allowlists.
+- [x] Return truthful `400`, `404`, and `500` responses without secret-bearing errors.
+- [x] Show inline save/delete failures; redirect or refresh only after `res.ok`.
+- [x] Revalidate affected public routes after successful mutations: `/` plus `/about`, `/graphics`, `/collaborations`, or `/works` as applicable.
+- [x] Replace the false “auto-save/immediate” dashboard copy with accurate save-and-publish behaviour.
+- [x] Replace `FlatCompat` with the native Next.js flat ESLint exports so lint starts without undeclared packages.
+- [x] Run `pnpm test && pnpm lint && pnpm typecheck && pnpm build`.
+- [x] Exercise one successful and one rejected mutation for every editor against a non-production database; restore changed values.
+- [x] Commit: `fix(admin): validate writes and surface persistence state`
 
 ---
 
 ## Final Acceptance
 
-- [ ] `pnpm test`, `pnpm lint`, `pnpm typecheck`, `pnpm build`, and `pnpm seo:check` all pass from a clean checkout.
-- [ ] Worktree diff contains only approved scope; no environment or secret files are included.
-- [ ] Security, project editing, theme persistence, metadata, and existing editor flows have recorded local evidence.
-- [ ] Deployment and live-provider verification remain separate, explicitly authorized work.
+- [x] `pnpm test`, `pnpm lint`, `pnpm typecheck`, `pnpm build`, and `pnpm seo:check` all pass from a clean checkout.
+- [x] Worktree diff contains only approved scope; no environment or secret files are included.
+- [x] Security, project editing, theme persistence, metadata, and existing editor flows have recorded local evidence.
+- [x] Deployment and live-provider verification remain separate, explicitly authorized work.

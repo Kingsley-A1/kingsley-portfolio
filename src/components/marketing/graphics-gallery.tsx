@@ -5,7 +5,6 @@ import Image from "next/image";
 import { X, ZoomIn } from "lucide-react";
 import type { GraphicsWork } from "@/features/admin/graphics-repository";
 import { Reveal } from "@/components/marketing/reveal";
-import { cn } from "@/lib/utils";
 
 export function GraphicsGallery({ items }: { items: GraphicsWork[] }) {
   const [lightbox, setLightbox] = useState<GraphicsWork | null>(null);

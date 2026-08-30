@@ -1,6 +1,7 @@
 import "server-only";
 
 import { query } from "@/lib/db";
+import type { AboutUpdateInput } from "@/features/admin/admin-schemas";
 
 export interface AboutContent {
   id: string;
@@ -89,24 +90,29 @@ export async function getAboutSafe(): Promise<AboutContent | null> {
   }
 }
 
-export async function updateAbout(input: {
-  bio?: string;
-  headline?: string;
-  extendedBio?: string;
-  interests?: string[];
-  socialLinks?: Record<string, string>;
-  photoUrl?: string | null;
-  photoKey?: string | null;
-  cvUrl?: string | null;
-  cvKey?: string | null;
-}): Promise<AboutContent> {
+const ABOUT_COLUMNS: Record<keyof AboutUpdateInput, string> = {
+  bio: "bio",
+  headline: "headline",
+  extendedBio: "extended_bio",
+  interests: "interests",
+  socialLinks: "social_links",
+  photoUrl: "photo_url",
+  photoKey: "photo_key",
+  cvUrl: "cv_url",
+  cvKey: "cv_key",
+};
+
+export async function updateAbout(
+  input: AboutUpdateInput,
+): Promise<AboutContent | null> {
   const sets: string[] = [];
   const values: unknown[] = [];
   let idx = 1;
 
   for (const [key, value] of Object.entries(input)) {
     if (value === undefined) continue;
-    const col = key.replace(/[A-Z]/g, (m) => `_${m.toLowerCase()}`);
+    const col = ABOUT_COLUMNS[key as keyof AboutUpdateInput];
+    if (!col) continue;
     if (key === "interests" || key === "socialLinks") {
       sets.push(`${col} = $${idx}::JSONB`);
       values.push(JSON.stringify(value));
@@ -123,5 +129,5 @@ export async function updateAbout(input: {
     `UPDATE personal_about SET ${sets.join(", ")} WHERE id = 'primary' RETURNING *`,
     values,
   );
-  return mapAbout(result.rows[0]);
+  return result.rows[0] ? mapAbout(result.rows[0]) : null;
 }

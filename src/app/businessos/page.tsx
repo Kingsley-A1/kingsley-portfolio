@@ -16,7 +16,6 @@ import { CommandBar } from "@/components/businessos/command-bar";
 import { AgentWalkers } from "@/components/businessos/agent-walkers";
 import { AGENTS, RECENT_HANDOFFS } from "@/features/businessos/data";
 import { cn } from "@/lib/utils";
-import type { AgentRole } from "@/features/businessos/data";
 
 const DEPARTMENTS = [
   { key: "all", label: "All Agents", icon: LayoutGrid },

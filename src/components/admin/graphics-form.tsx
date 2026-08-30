@@ -24,6 +24,7 @@ export function GraphicsForm({ initial }: { initial?: GraphicsWork }) {
   const router = useRouter();
   const isEdit = !!initial;
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     title: initial?.title ?? "",
     category: initial?.category ?? "Branding",
@@ -41,6 +42,7 @@ export function GraphicsForm({ initial }: { initial?: GraphicsWork }) {
 
   async function handleSave() {
     setSaving(true);
+    setError("");
     try {
       const url = isEdit
         ? `/admin/api/graphics/${initial!.id}`
@@ -51,10 +53,15 @@ export function GraphicsForm({ initial }: { initial?: GraphicsWork }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (res.ok) {
-        router.push("/admin/graphics");
-        router.refresh();
+      if (!res.ok) {
+        const payload = await res.json().catch(() => null);
+        setError(payload?.error ?? "The graphic could not be saved.");
+        return;
       }
+      router.push("/admin/graphics");
+      router.refresh();
+    } catch {
+      setError("The graphic could not be saved. Check your connection and try again.");
     } finally {
       setSaving(false);
     }
@@ -166,6 +173,7 @@ export function GraphicsForm({ initial }: { initial?: GraphicsWork }) {
         <Save className="h-4 w-4" />
         {saving ? "Saving..." : isEdit ? "Update Graphic" : "Create Graphic"}
       </button>
+      {error && <p role="alert" className="text-body-sm text-red-600">{error}</p>}
     </div>
   );
 }

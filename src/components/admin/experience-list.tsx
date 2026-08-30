@@ -13,13 +13,22 @@ export function AdminExperienceList({
 }) {
   const router = useRouter();
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [error, setError] = useState("");
 
   async function handleDelete(id: string) {
     if (!confirm("Delete this experience entry?")) return;
     setDeleting(id);
+    setError("");
     try {
-      await fetch(`/admin/api/experience/${id}`, { method: "DELETE" });
+      const response = await fetch(`/admin/api/experience/${id}`, { method: "DELETE" });
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null);
+        setError(payload?.error ?? "The experience entry could not be deleted.");
+        return;
+      }
       router.refresh();
+    } catch {
+      setError("The experience entry could not be deleted. Check your connection and try again.");
     } finally {
       setDeleting(null);
     }
@@ -27,6 +36,7 @@ export function AdminExperienceList({
 
   return (
     <div className="space-y-3">
+      {error && <p role="alert" className="text-body-sm text-red-600">{error}</p>}
       {items.map((item) => (
         <div
           key={item.id}
@@ -34,6 +44,7 @@ export function AdminExperienceList({
         >
           <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-neutral-100">
             {item.companyLogoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element -- Admin previews accept operator-supplied URLs outside the public image allowlist.
               <img
                 src={item.companyLogoUrl}
                 alt={item.company}

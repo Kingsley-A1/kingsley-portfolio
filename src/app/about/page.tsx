@@ -61,7 +61,7 @@ export default async function AboutPage() {
                     `I'm ${PERSONA.name}, socially known as ${PERSONA.alias}. I don't think of engineering as a job — it's the way I test my own belief that almost anything can be built if you're precise enough about how you think.`}
                 </p>
                 <p>
-                  I'm a full-stack engineer first, but I read code like an
+                  I&apos;m a full-stack engineer first, but I read code like an
                   advocate for the craft: convinced that good software is a
                   discipline, not a talent, and that the people who go
                   furthest are the ones who stay curious long after the

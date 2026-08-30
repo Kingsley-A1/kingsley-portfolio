@@ -13,13 +13,22 @@ export function AdminCollaborationsList({
 }) {
   const router = useRouter();
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [error, setError] = useState("");
 
   async function handleDelete(id: string) {
     if (!confirm("Delete this collaboration?")) return;
     setDeleting(id);
+    setError("");
     try {
-      await fetch(`/admin/api/collaborations/${id}`, { method: "DELETE" });
+      const response = await fetch(`/admin/api/collaborations/${id}`, { method: "DELETE" });
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null);
+        setError(payload?.error ?? "The collaboration could not be deleted.");
+        return;
+      }
       router.refresh();
+    } catch {
+      setError("The collaboration could not be deleted. Check your connection and try again.");
     } finally {
       setDeleting(null);
     }
@@ -27,6 +36,7 @@ export function AdminCollaborationsList({
 
   return (
     <div className="space-y-3">
+      {error && <p role="alert" className="text-body-sm text-red-600">{error}</p>}
       {items.map((item) => (
         <div
           key={item.id}
@@ -34,6 +44,7 @@ export function AdminCollaborationsList({
         >
           <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-xl bg-neutral-100">
             {item.partnerLogoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element -- Admin previews accept operator-supplied URLs outside the public image allowlist.
               <img
                 src={item.partnerLogoUrl}
                 alt={item.partnerName}

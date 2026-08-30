@@ -43,7 +43,7 @@ export function FileOrUrlInput({
 
       const data = await res.json();
       onChange(data.url);
-    } catch (err) {
+    } catch {
       setError("Upload failed. Try using a URL instead.");
     } finally {
       setUploading(false);

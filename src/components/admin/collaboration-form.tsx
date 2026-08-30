@@ -11,6 +11,7 @@ export function CollaborationForm({ initial }: { initial?: Collaboration }) {
   const router = useRouter();
   const isEdit = !!initial;
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     partnerName: initial?.partnerName ?? "",
     partnerLogoUrl: initial?.partnerLogoUrl ?? "",
@@ -29,6 +30,7 @@ export function CollaborationForm({ initial }: { initial?: Collaboration }) {
 
   async function handleSave() {
     setSaving(true);
+    setError("");
     try {
       const url = isEdit
         ? `/admin/api/collaborations/${initial!.id}`
@@ -39,10 +41,15 @@ export function CollaborationForm({ initial }: { initial?: Collaboration }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (res.ok) {
-        router.push("/admin/collaborations");
-        router.refresh();
+      if (!res.ok) {
+        const payload = await res.json().catch(() => null);
+        setError(payload?.error ?? "The collaboration could not be saved.");
+        return;
       }
+      router.push("/admin/collaborations");
+      router.refresh();
+    } catch {
+      setError("The collaboration could not be saved. Check your connection and try again.");
     } finally {
       setSaving(false);
     }
@@ -123,6 +130,7 @@ export function CollaborationForm({ initial }: { initial?: Collaboration }) {
         <Save className="h-4 w-4" />
         {saving ? "Saving..." : isEdit ? "Update" : "Create"}
       </button>
+      {error && <p role="alert" className="text-body-sm text-red-600">{error}</p>}
     </div>
   );
 }

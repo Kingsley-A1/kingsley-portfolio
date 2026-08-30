@@ -1,5 +1,6 @@
 import { listGraphics } from "@/features/admin/graphics-repository";
 import { AdminGraphicsList } from "@/components/admin/graphics-list";
+import Link from "next/link";
 
 export default async function AdminGraphicsPage() {
   const items = await listGraphics();
@@ -13,12 +14,12 @@ export default async function AdminGraphicsPage() {
             {items.length} design works in your portfolio.
           </p>
         </div>
-        <a
+        <Link
           href="/admin/graphics/new"
           className="rounded-xl bg-neutral-900 px-5 py-2.5 text-body-sm font-semibold text-white transition-all hover:bg-neutral-800"
         >
           + Add Graphic
-        </a>
+        </Link>
       </div>
 
       <AdminGraphicsList items={items} />

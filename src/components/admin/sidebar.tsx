@@ -67,7 +67,7 @@ export function AdminSidebar() {
     }
   }
 
-  function NavItems() {
+  function renderNavItems() {
     return (
       <ul className="flex flex-col gap-1">
         {NAV_ITEMS.map((item) => {
@@ -136,7 +136,7 @@ export function AdminSidebar() {
           </div>
         </div>
 
-        <NavItems />
+        {renderNavItems()}
 
         <div className="absolute bottom-4 left-4 right-4 space-y-1">
           <Link

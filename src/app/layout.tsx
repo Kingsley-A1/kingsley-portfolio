@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import {
   SITE_DESCRIPTION,
-  SITE_NAME,
   SITE_URL,
   PERSONA,
 } from "@/lib/constants";

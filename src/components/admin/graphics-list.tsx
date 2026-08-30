@@ -2,20 +2,29 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Pencil, Trash2, Eye, EyeOff } from "lucide-react";
+import { Pencil, Trash2, EyeOff } from "lucide-react";
 import type { GraphicsWork } from "@/features/admin/graphics-repository";
 import { useState } from "react";
 
 export function AdminGraphicsList({ items }: { items: GraphicsWork[] }) {
   const router = useRouter();
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [error, setError] = useState("");
 
   async function handleDelete(id: string) {
     if (!confirm("Delete this graphic?")) return;
     setDeleting(id);
+    setError("");
     try {
-      await fetch(`/admin/api/graphics/${id}`, { method: "DELETE" });
+      const response = await fetch(`/admin/api/graphics/${id}`, { method: "DELETE" });
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null);
+        setError(payload?.error ?? "The graphic could not be deleted.");
+        return;
+      }
       router.refresh();
+    } catch {
+      setError("The graphic could not be deleted. Check your connection and try again.");
     } finally {
       setDeleting(null);
     }
@@ -23,6 +32,7 @@ export function AdminGraphicsList({ items }: { items: GraphicsWork[] }) {
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {error && <p role="alert" className="col-span-full text-body-sm text-red-600">{error}</p>}
       {items.map((item) => (
         <div
           key={item.id}
@@ -30,6 +40,7 @@ export function AdminGraphicsList({ items }: { items: GraphicsWork[] }) {
         >
           <div className="aspect-[4/3] overflow-hidden bg-neutral-100">
             {item.imageUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element -- Admin previews accept operator-supplied URLs outside the public image allowlist.
               <img
                 src={item.imageUrl}
                 alt={item.title}

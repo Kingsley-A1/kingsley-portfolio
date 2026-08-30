@@ -1,6 +1,10 @@
 import "server-only";
 
 import { query } from "@/lib/db";
+import type {
+  GraphicsCreateInput,
+  GraphicsUpdateInput,
+} from "@/features/admin/admin-schemas";
 
 export interface GraphicsWork {
   id: string;
@@ -78,17 +82,9 @@ export async function getGraphics(id: string) {
   return result.rows[0] ? mapGraphics(result.rows[0]) : null;
 }
 
-export async function createGraphics(input: {
-  title: string;
-  category: string;
-  description?: string;
-  imageUrl: string;
-  imageKey?: string;
-  client?: string;
-  year: string;
-  published?: boolean;
-  sortOrder?: number;
-}): Promise<GraphicsWork> {
+export async function createGraphics(
+  input: GraphicsCreateInput,
+): Promise<GraphicsWork> {
   const result = await query<GraphicsRow>(
     `INSERT INTO graphics_works (title, category, description, image_url, image_key, client, year, published, sort_order)
      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
@@ -107,27 +103,30 @@ export async function createGraphics(input: {
   return mapGraphics(result.rows[0]);
 }
 
+const GRAPHICS_COLUMNS: Record<keyof GraphicsUpdateInput, string> = {
+  title: "title",
+  category: "category",
+  description: "description",
+  imageUrl: "image_url",
+  imageKey: "image_key",
+  client: "client",
+  year: "year",
+  published: "published",
+  sortOrder: "sort_order",
+};
+
 export async function updateGraphics(
   id: string,
-  input: Partial<{
-    title: string;
-    category: string;
-    description: string | null;
-    imageUrl: string;
-    imageKey: string | null;
-    client: string | null;
-    year: string;
-    published: boolean;
-    sortOrder: number;
-  }>,
-): Promise<GraphicsWork> {
+  input: GraphicsUpdateInput,
+): Promise<GraphicsWork | null> {
   const sets: string[] = [];
   const values: unknown[] = [];
   let idx = 1;
 
   for (const [key, value] of Object.entries(input)) {
     if (value === undefined) continue;
-    const col = key.replace(/[A-Z]/g, (m) => `_${m.toLowerCase()}`);
+    const col = GRAPHICS_COLUMNS[key as keyof GraphicsUpdateInput];
+    if (!col) continue;
     sets.push(`${col} = $${idx}`);
     values.push(value);
     idx++;
@@ -139,9 +138,10 @@ export async function updateGraphics(
     `UPDATE graphics_works SET ${sets.join(", ")} WHERE id = $${idx} RETURNING *`,
     values,
   );
-  return mapGraphics(result.rows[0]);
+  return result.rows[0] ? mapGraphics(result.rows[0]) : null;
 }
 
-export async function deleteGraphics(id: string): Promise<void> {
-  await query("DELETE FROM graphics_works WHERE id = $1", [id]);
+export async function deleteGraphics(id: string): Promise<boolean> {
+  const result = await query("DELETE FROM graphics_works WHERE id = $1", [id]);
+  return (result.rowCount ?? 0) > 0;
 }

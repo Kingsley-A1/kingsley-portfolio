@@ -11,6 +11,7 @@ export function ExperienceForm({ initial }: { initial?: WorkExperience }) {
   const router = useRouter();
   const isEdit = !!initial;
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
   const [skillInput, setSkillInput] = useState("");
   const [form, setForm] = useState({
     company: initial?.company ?? "",
@@ -46,6 +47,7 @@ export function ExperienceForm({ initial }: { initial?: WorkExperience }) {
 
   async function handleSave() {
     setSaving(true);
+    setError("");
     try {
       const url = isEdit
         ? `/admin/api/experience/${initial!.id}`
@@ -56,10 +58,15 @@ export function ExperienceForm({ initial }: { initial?: WorkExperience }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (res.ok) {
-        router.push("/admin/experience");
-        router.refresh();
+      if (!res.ok) {
+        const payload = await res.json().catch(() => null);
+        setError(payload?.error ?? "The experience entry could not be saved.");
+        return;
       }
+      router.push("/admin/experience");
+      router.refresh();
+    } catch {
+      setError("The experience entry could not be saved. Check your connection and try again.");
     } finally {
       setSaving(false);
     }
@@ -219,6 +226,7 @@ export function ExperienceForm({ initial }: { initial?: WorkExperience }) {
         <Save className="h-4 w-4" />
         {saving ? "Saving..." : isEdit ? "Update Role" : "Create Role"}
       </button>
+      {error && <p role="alert" className="text-body-sm text-red-600">{error}</p>}
     </div>
   );
 }
