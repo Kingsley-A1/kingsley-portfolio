@@ -10,6 +10,8 @@ import { Reveal } from "@/components/marketing/reveal";
 import { TerminalUI } from "@/components/marketing/terminal-ui";
 import { cn } from "@/lib/utils";
 
+export const revalidate = 60;
+
 export default async function HomePage() {
   const [projects, collaborations, experiences, about] = await Promise.all([
     listPublishedPortfolioProjectsSafe(),

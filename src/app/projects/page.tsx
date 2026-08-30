@@ -5,6 +5,8 @@ import { ProjectsShowcase } from "@/components/marketing/projects-showcase";
 import { listPublishedPortfolioProjectsSafe } from "@/features/admin/projects-repository";
 import { PERSONA, SITE_URL } from "@/lib/constants";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Projects",
   description: `Explore ${PERSONA.name}'s portfolio — web applications, mobile apps, and digital products built with precision and purpose.`,

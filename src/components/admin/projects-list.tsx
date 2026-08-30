@@ -1,6 +1,5 @@
-import { ExternalLink, Eye, EyeOff, Star } from "lucide-react";
+import { ExternalLink, Star } from "lucide-react";
 import type { PortfolioProjectItem } from "@/features/admin/projects-repository";
-import { cn } from "@/lib/utils";
 
 export function AdminProjectsList({
   projects,

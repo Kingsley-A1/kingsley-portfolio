@@ -29,7 +29,6 @@ export function ProjectsShowcase({
   projects: PortfolioProjectItem[];
 }) {
   const [filter, setFilter] = useState<string>("all");
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     if (filter === "all") return projects;
@@ -45,6 +44,7 @@ export function ProjectsShowcase({
           <button
             key={f.value}
             onClick={() => setFilter(f.value)}
+            aria-pressed={filter === f.value}
             className={cn(
               "rounded-full border px-5 py-2 text-body-sm font-medium transition-all",
               filter === f.value
@@ -66,8 +66,6 @@ export function ProjectsShowcase({
             <Reveal key={project.id} delay={i * 0.05}>
               <div
                 className="group relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
-                onMouseEnter={() => setHoveredId(project.id)}
-                onMouseLeave={() => setHoveredId(null)}
               >
                 {/* Image */}
                 <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
@@ -84,26 +82,6 @@ export function ProjectsShowcase({
                       <TypeIcon className="h-10 w-10 text-neutral-300 dark:text-neutral-600" />
                     </div>
                   )}
-
-                  {/* Overlay on hover */}
-                  <div
-                    className={cn(
-                      "absolute inset-0 flex items-center justify-center bg-neutral-900/60 backdrop-blur-sm transition-opacity duration-300",
-                      hoveredId === project.id ? "opacity-100" : "opacity-0",
-                    )}
-                  >
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-body-sm font-semibold text-neutral-900 shadow-lg transition-transform hover:scale-105"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                        Visit Live
-                      </a>
-                    )}
-                  </div>
 
                   {/* Coming soon badge */}
                   {project.comingSoon && (
@@ -155,8 +133,21 @@ export function ProjectsShowcase({
                     )}
                   </div>
 
-                  <div className="mt-3 text-caption text-neutral-400 dark:text-neutral-500">
-                    {project.year}
+                  <div className="mt-4 flex items-center justify-between gap-3">
+                    <span className="text-caption text-neutral-400 dark:text-neutral-500">
+                      {project.year}
+                    </span>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-lg text-body-sm font-semibold text-brand-blue underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue dark:text-brand-blue-bright"
+                      >
+                        Visit Live
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

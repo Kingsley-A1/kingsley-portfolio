@@ -50,7 +50,7 @@
 - [x] Restrict uploads to JPEG, PNG, WebP, and PDF; enforce a 10 MB limit and derive extensions from validated MIME types.
 - [x] Run `pnpm test && pnpm typecheck && pnpm build`.
 - [x] Manually prove an arbitrary cookie redirects to `/admin/login`, a valid login works, and logout invalidates access.
-- [ ] Commit: `fix(admin): secure sessions and uploads`
+- [x] Commit: `fix(admin): secure sessions and uploads`
 
 **Gate:** Do not add project writes until forged-cookie rejection passes.
 
@@ -75,17 +75,17 @@
 
 **Contract:** Bespoke sends `{ event, projectId, occurredAt }` with timestamped HMAC-SHA256 headers. Kingsley accepts only valid signatures within five minutes, then revalidates `/` and `/projects`; repeated valid requests are harmless.
 
-- [ ] Write failing Kingsley tests for valid, forged, stale, malformed, and wrong-secret signatures.
-- [ ] Implement the signed Kingsley revalidation endpoint; fail closed when the secret is missing or invalid.
-- [ ] Resolve Bespoke R2-backed images through Bespoke's public image endpoint and resolve relative legacy image paths against the Bespoke origin.
-- [ ] Make Kingsley home/projects use a 60-second revalidation fallback.
-- [ ] Keep Kingsley Projects admin read-only and link explicitly to Bespoke `/admin/portfolio` for create/edit/delete.
-- [ ] Make project filters expose `aria-pressed`; keep the live-project link visible and keyboard/touch reachable.
-- [ ] Write failing Bespoke tests for request signing and disabled/misconfigured notification behavior.
-- [ ] Notify Kingsley after successful Bespoke project create/update/delete without rolling back the authoritative Bespoke mutation if the secondary refresh fails.
-- [ ] Document variable names/placeholders only in both `.env.example` files; do not configure live secrets.
+- [x] Write failing Kingsley tests for valid, forged, stale, malformed, and wrong-secret signatures.
+- [x] Implement the signed Kingsley revalidation endpoint; fail closed when the secret is missing or invalid.
+- [x] Resolve Bespoke R2-backed images through Bespoke's public image endpoint and resolve relative legacy image paths against the Bespoke origin.
+- [x] Make Kingsley home/projects use a 60-second revalidation fallback.
+- [x] Keep Kingsley Projects admin read-only and link explicitly to Bespoke `/admin/portfolio` for create/edit/delete.
+- [x] Make project filters expose `aria-pressed`; keep the live-project link visible and keyboard/touch reachable.
+- [x] Write failing Bespoke tests for request signing and disabled/misconfigured notification behavior.
+- [x] Notify Kingsley after successful Bespoke project create/update/delete without rolling back the authoritative Bespoke mutation if the secondary refresh fails.
+- [x] Document variable names/placeholders only in both `.env.example` files; do not configure live secrets.
 - [ ] Run tests, lint, typecheck, and build in both repositories.
-- [ ] Verify locally with synthetic signed requests only; do not mutate a configured database.
+- [x] Verify locally with synthetic signed requests only; do not mutate a configured database.
 - [ ] Commit Kingsley: `feat(portfolio): sync Bespoke-owned projects`
 - [ ] Commit Bespoke: `feat(portfolio): notify Kingsley project refresh`
 

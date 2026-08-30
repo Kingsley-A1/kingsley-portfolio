@@ -1,6 +1,7 @@
 import "server-only";
 
 import { query } from "@/lib/db";
+import { resolveBespokeProjectImage } from "@/lib/portfolio-assets";
 
 export interface PortfolioProjectItem {
   id: string;
@@ -9,6 +10,7 @@ export interface PortfolioProjectItem {
   category: string;
   description: string;
   imageUrl: string;
+  imageKey: string | null;
   liveUrl: string | null;
   tags: string[];
   year: string;
@@ -25,6 +27,7 @@ interface ProjectRow {
   category: string;
   description: string;
   image_url: string;
+  image_key: string | null;
   live_url: string | null;
   tags: unknown;
   year: string;
@@ -54,7 +57,15 @@ function mapProject(row: ProjectRow): PortfolioProjectItem {
     type: row.project_type,
     category: row.category,
     description: row.description,
-    imageUrl: row.image_url,
+    imageUrl: resolveBespokeProjectImage(
+      {
+        id: row.id,
+        imageKey: row.image_key,
+        imageUrl: row.image_url,
+        baseUrl: process.env.BESPOKE_PORTFOLIO_BASE_URL,
+      },
+    ),
+    imageKey: row.image_key,
     liveUrl: row.live_url,
     tags: parseTags(row.tags),
     year: row.year,

@@ -25,6 +25,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.simpleicons.org",
       },
+      {
+        protocol: "https",
+        hostname: "www.bespoketech.com.ng",
+      },
+      {
+        protocol: "https",
+        hostname: "bespoketech.com.ng",
+      },
     ],
   },
   async headers() {
