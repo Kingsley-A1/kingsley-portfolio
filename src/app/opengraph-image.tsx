@@ -11,6 +11,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpenGraphImage() {
+  // og-photo.jpg is the JPEG derivative of public/photos/on-blue-shirt.webp.
+  // satori (next/og) cannot decode WebP, so the route reads the derivative —
+  // regenerate it with `pnpm og:photo` after replacing the source portrait.
   const photoBuffer = await readFile(
     path.join(process.cwd(), "public", "og-photo.jpg"),
   );
