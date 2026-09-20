@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowDown, ArrowRight, Download, ExternalLink, Building2, Braces, Terminal, Palette, Brain } from "lucide-react";
+import { ArrowDown, ArrowRight, ExternalLink, Building2, Braces, Terminal, Palette, Brain } from "lucide-react";
 import { PERSONA, CORE_SKILLS } from "@/lib/constants";
 import { listPublishedPortfolioProjectsSafe } from "@/features/admin/projects-repository";
 import { listPublishedCollaborationsSafe } from "@/features/admin/collaborations-repository";
@@ -44,7 +44,12 @@ export default async function HomePage() {
               <h1 className="mt-5 sm:mt-6 flex flex-col text-[2.5rem] sm:text-[3.25rem] lg:text-display font-bold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50">
                 <span>Engineer.</span>
                 <span>Creator.</span>
-                <span>Problem solver.</span>
+                <span>
+                  Problem{" "}
+                  <span className="inline-block rounded-none bg-brand-blue px-2 text-white sm:px-3 dark:bg-brand-blue-bright">
+                    Solver.
+                  </span>
+                </span>
               </h1>
 
               <p className="mt-5 sm:mt-6 max-w-lg text-body sm:text-body-lg leading-body text-neutral-600 dark:text-neutral-400">
@@ -66,13 +71,6 @@ export default async function HomePage() {
                 >
                   About me
                 </Link>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-6 py-3 text-body font-semibold text-neutral-500 dark:text-neutral-400 transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-800"
-                >
-                  <Download className="h-4 w-4" />
-                  CV
-                </a>
               </div>
 
               <div className="mt-10 sm:mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
