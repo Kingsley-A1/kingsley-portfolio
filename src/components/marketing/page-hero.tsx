@@ -16,7 +16,7 @@ export function PageHero({ label, title, description }: PageHeroProps) {
         <p className="text-overline font-bold uppercase tracking-[0.2em] text-brand-blue dark:text-brand-blue-bright">
           {label}
         </p>
-        <h1 className="mt-4 text-display font-bold leading-display tracking-tight text-neutral-900 dark:text-neutral-50">
+        <h1 className="mt-4 text-balance text-h2 font-bold leading-tight tracking-tight text-neutral-900 sm:text-h1 sm:leading-display lg:text-display dark:text-neutral-50">
           {title.split(" ").map((word, i, arr) => {
             // Solid single-accent emphasis on the final word — no gradient text.
             if (i === arr.length - 1) {
